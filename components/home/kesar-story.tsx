@@ -536,8 +536,7 @@ function KesarStoryContent() {
     offset: ["start start", "end end"]
   })
 
-  const x = useTransform(scrollYProgress, [0, 1], ["0%", "-83.333%"])
-
+const x = useTransform(scrollYProgress, [0, 1], ["0vw", "-500vw"])
   return (
     <section ref={containerRef} className="relative h-[600vh]" style={{ backgroundColor: "#0A0805" }}>
       {/* Sticky title */}
