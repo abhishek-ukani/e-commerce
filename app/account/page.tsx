@@ -1,7 +1,7 @@
 'use client'
 export const dynamic = "force-dynamic";
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { motion } from 'framer-motion'
 import { 
@@ -39,7 +39,7 @@ import type { Address } from '@/lib/store/auth-store'
 
 type Tab = 'profile' | 'wallet' | 'referral' | 'orders' | 'addresses'
 
-export default function AccountPage() {
+function AccountPageContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const { user, isAuthenticated, isHydrated, logout, updateProfile, addAddress, removeAddress, setDefaultAddress } = useAuth()
@@ -584,5 +584,13 @@ export default function AccountPage() {
       </main>
       <Footer />
     </div>
+  )
+}
+
+export default function AccountPage() {
+  return (
+    <Suspense fallback={<div>Loading...</div>}>
+      <AccountPageContent />
+    </Suspense>
   )
 }
