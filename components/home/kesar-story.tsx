@@ -243,12 +243,12 @@ function Frame01() {
           </h2>
           
           <p className="text-base md:text-lg text-[#A89880] max-w-xl leading-relaxed mt-6">
-            સન ૧૯૩૧ ની વાત સે. જૂનાગઢ ના વઝીર સાલે ભાઈ એ વાંથળી માં એક અજીબ ઝાડ જોયું. 
+            સન ૧૯૩૧ ની વાત સે. જૂનાગઢ ના વઝીર સાલે ભાઈ એ વંથલી માં એક અજીબ ઝાડ જોયું. 
             ફળ ચાખ્યું — આંખો બંધ થઈ ગઈ. નવાબ મહોબત ખાન ને ખવડાવ્યું, 
             ઈ બોલ્યા — &apos;આ તો કેસર સે, ભઈ!&apos; બસ, નામ પડી ગ્યું. ઈ દી થી આજ સુધી.
           </p>
           
-          <span className="text-sm text-[#A89880] opacity-60 mt-8 block">વાંથળી, જૂનાગઢ · ૧૯૩૧</span>
+          <span className="text-sm text-[#A89880] opacity-60 mt-8 block">વંથલી, જૂનાગઢ · ૧૯૩૧</span>
         </div>
         
         <div className="md:w-[40%] flex flex-col items-center justify-center">
@@ -273,12 +273,12 @@ function Frame02() {
         
         <p className="text-base md:text-lg text-[#A89880] max-w-2xl leading-relaxed mt-6">
           ગિરનાર ના પડછાયા માં, સૌરાષ્ટ્ર ની કડકડતી ગરમી માં — આ ધરતી નો સ્વાદ કેરી ની અંદર ઉતરે સે. 
-          તળાળા ગીર ની ખારી-મીઠી હવા, કાળી માટી — આ combination દુનિયા ભર માં બીજે ક્યાંય નથ.
+          તલાળા ગીર ની ખારી-મીઠી હવા, કાળી માટી — આ combination દુનિયા ભર માં બીજે ક્યાંય નથ.
         </p>
         
         <div className="mt-10">
           <GujaratMapIcon />
-          <p className="text-sm text-[#A89880] mt-2">તળાળા ગીર · ૨૦,૦૦૦ હેક્ટર</p>
+          <p className="text-sm text-[#A89880] mt-2">તલાળા ગીર · ૨૦,૦૦૦ હેક્ટર</p>
         </div>
       </div>
     </Frame>
@@ -300,7 +300,7 @@ function Frame03() {
           <p className="text-base md:text-lg text-[#A89880] max-w-xl leading-relaxed mt-6">
             ૨૦૧૧ માં ભારત સરકારે GI Tag આપ્યો — નંબર ૧૮૫. ગુજરાત નો પે&apos;લો ખેત ઉત્પાદન, 
             ને આખા ભારત ની બીજી કેરી જેને આ સન્માન મળ્યું. હવે કાયદેસર — &apos;ગીર કેસર&apos; નું નામ 
-            ફક્ત તળાળા ની કેરી ને જ વાપરી શકાય. બીજા ભઈ ગમે ઈ કે&apos;વા દો — અસલ તો આ જ સે.
+            ફક્ત તલાળા ની કેરી ને જ વાપરી શકાય. બીજા ભઈ ગમે ઈ કે&apos;વા દો — અસલ તો આ જ સે.
           </p>
         </div>
         
@@ -427,7 +427,7 @@ function Frame05() {
           </h2>
           
           <p className="text-sm text-[#A89880] leading-relaxed mt-4">
-            અમારી કેરી તળાળા ગીર ની ખેતર માં થી સાચ્ચા ટેમ પર ઉતારીએ.
+            અમારી કેરી તલાળા ગીર ની ખેતર માં થી સાચ્ચા ટેમ પર ઉતારીએ.
             <br /><br />
             ઘરે આવે, ૪-૫ દી રૂમ temperature પર રે&apos;વા દો — કુદરત પોતે જ પકવે.
             <br /><br />
@@ -539,13 +539,15 @@ function KesarStoryContent() {
 const x = useTransform(scrollYProgress, [0, 1], ["0vw", "-500vw"])
   return (
     <section ref={containerRef} className="relative h-[600vh]" style={{ backgroundColor: "#0A0805" }}>
+      <div className="absolute top-0 left-0 w-full h-32 bg-gradient-to-b from-transparent to-[#0A0805] z-10" />
+
       {/* Sticky title */}
       <div className="sticky top-0 left-0 z-20 p-6 md:p-8 pointer-events-none">
         <span className="text-[#E8820C] text-sm tracking-[0.3em] uppercase">The Kesar Story</span>
       </div>
       
       {/* Horizontal scroll container */}
-      <div className="sticky top-0 h-screen overflow-hidden" style={{ marginTop: "-56px" }}>
+      <div className="sticky top-0 h-screen overflow-hidden">
         <motion.div 
           style={{ x }}
           className="flex h-full"
