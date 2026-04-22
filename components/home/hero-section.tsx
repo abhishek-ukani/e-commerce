@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState, useCallback } from 'react';
 
-const TOTAL_FRAMES = 190;
+const TOTAL_FRAMES = 150;
 const PRELOAD_FRAMES = 20; // Load first 20 frames immediately
 const BATCH_SIZE = 10; // Load 10 frames at a time
 
