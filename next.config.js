@@ -4,6 +4,14 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
+  // Performance optimizations
+  experimental: {
+    optimizeCss: true,
+  },
+  // Compression
+  compress: true,
+  // Disable x-powered-by header
+  poweredByHeader: false,
 };
 
 module.exports = nextConfig;
