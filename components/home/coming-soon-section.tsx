@@ -52,7 +52,7 @@ export default function ComingSoonSection() {
           viewport={{ once: true }}
         >
           <span className="text-[#E8820C] text-sm font-medium">
-            🥭  સિઝન ૨૦૨૫  ·  જૂન - જુલાઈ
+            🥭  સિઝન ૨૦૨૬  ·  મે - જૂન - જુલાઈ
           </span>
         </motion.div>
 
