@@ -18,12 +18,11 @@ export default function HomePage() {
         <Suspense fallback={<div className="h-96 flex items-center justify-center">Loading...</div>}>
           <KesarStory />
         </Suspense>
+        <ComingSoonSection />
         {/* <ProductSection /> */}
         {/* <AboutSection /> */}
       </main>
-      <Suspense fallback={<div className="h-32 flex items-center justify-center">Loading...</div>}>
-        <ComingSoonSection />
-      </Suspense>
+      
       <Footer />
     </div>
   )
