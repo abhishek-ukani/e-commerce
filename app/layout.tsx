@@ -1,26 +1,27 @@
 import type { Metadata, Viewport } from 'next'
-import { Poppins, Noto_Sans_Gujarati, Noto_Serif_Gujarati } from 'next/font/google'
+import { DM_Sans, Noto_Sans_Gujarati, Cormorant_Garamond } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import { CartProvider } from '@/components/providers/cart-provider'
 import { AuthProvider } from '@/components/providers/auth-provider'
 import './globals.css'
 
-const poppins = Poppins({ 
+const dmSans = DM_Sans({ 
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700"],
-  variable: "--font-poppins"
+  weight: ["300", "400", "500"],
+  variable: "--font-dm-sans"
 })
 
 const notoSansGujarati = Noto_Sans_Gujarati({ 
   subsets: ["gujarati"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["300", "400", "600", "700"],
   variable: "--font-gujarati-sans"
 })
 
-const notoSerifGujarati = Noto_Serif_Gujarati({ 
-  subsets: ["gujarati"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-gujarati-serif"
+const cormorantGaramond = Cormorant_Garamond({ 
+  subsets: ["latin"],
+  weight: ["300", "400", "600"],
+  style: ["normal", "italic"],
+  variable: "--font-cormorant-garamond"
 })
 
 export const metadata: Metadata = {
@@ -59,7 +60,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`${poppins.variable} ${notoSansGujarati.variable} ${notoSerifGujarati.variable}`}>
+    <html lang="en" className={`${dmSans.variable} ${notoSansGujarati.variable} ${cormorantGaramond.variable}`}>
       <body className="font-sans antialiased bg-background">
         <AuthProvider>
           <CartProvider>

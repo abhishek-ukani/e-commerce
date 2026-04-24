@@ -4,62 +4,45 @@
 @custom-variant dark (&:is(.dark *));
 
 :root {
-  /* Talala Kesariya - Premium Kesar Mango Theme */
-  /* Saffron Orange (Primary) */
-  --background: oklch(0.98 0.015 85);
-  --foreground: oklch(0.25 0.05 50);
-  
-  /* Cream White Cards */
-  --card: oklch(0.995 0.008 90);
-  --card-foreground: oklch(0.25 0.05 50);
-  
-  --popover: oklch(0.995 0.008 90);
-  --popover-foreground: oklch(0.25 0.05 50);
-  
-  /* Saffron Orange Primary */
-  --primary: oklch(0.65 0.18 50);
-  --primary-foreground: oklch(0.99 0.01 90);
-  
-  /* Mango Yellow Secondary */
-  --secondary: oklch(0.88 0.12 90);
-  --secondary-foreground: oklch(0.30 0.06 50);
-  
-  /* Forest Green Accent */
-  --accent: oklch(0.45 0.12 145);
-  --accent-foreground: oklch(0.98 0.01 90);
-  
-  /* Muted tones */
-  --muted: oklch(0.94 0.02 85);
-  --muted-foreground: oklch(0.45 0.03 50);
-  
-  --destructive: oklch(0.55 0.22 25);
-  --destructive-foreground: oklch(0.98 0.01 90);
-  
-  --border: oklch(0.90 0.03 80);
-  --input: oklch(0.92 0.02 85);
-  --ring: oklch(0.65 0.18 50);
-  
-  /* Chart colors */
-  --chart-1: oklch(0.65 0.18 50);
-  --chart-2: oklch(0.75 0.15 90);
-  --chart-3: oklch(0.45 0.12 145);
-  --chart-4: oklch(0.80 0.10 70);
-  --chart-5: oklch(0.55 0.08 30);
-  
-  --radius: 0.75rem;
-  
-  /* Custom Talala colors */
-  --saffron: oklch(0.65 0.18 50);
-  --mango: oklch(0.82 0.14 90);
-  --cream: oklch(0.97 0.015 85);
-  --forest: oklch(0.45 0.12 145);
-  --gold: oklch(0.75 0.12 80);
+  /* Premium Dark Aesthetic from Reference */
+  --bg: #0A0805;
+  --bg2: #0F0C08;
+  --accent: #E8820C;
+  --accent2: #C46A08;
+  --cream: #FFF8E7;
+  --muted: #8A7A68;
+  --muted2: #6A5C4E;
+  --border-color: rgba(232, 130, 12, 0.12);
+  --border2: rgba(255, 248, 231, 0.06);
+
+  /* Tailwind Standard Mappings */
+  --background: var(--bg);
+  --foreground: var(--cream);
+  --card: var(--bg2);
+  --card-foreground: var(--cream);
+  --popover: var(--bg2);
+  --popover-foreground: var(--cream);
+  --primary: var(--accent);
+  --primary-foreground: var(--bg);
+  --secondary: var(--bg2);
+  --secondary-foreground: var(--cream);
+  --muted-tw: var(--muted);
+  --muted-foreground: var(--muted2);
+  --accent-tw: var(--accent);
+  --accent-foreground: var(--bg);
+  --destructive: #7f1d1d;
+  --destructive-foreground: var(--cream);
+  --border: var(--border-color);
+  --input: var(--border2);
+  --ring: var(--accent);
+  --radius: 2px;
 }
 
 @theme inline {
-  --font-sans: 'Poppins', 'Noto Sans Gujarati', sans-serif;
-  --font-serif: 'Noto Serif Gujarati', serif;
-  --font-mono: 'Geist Mono', 'Geist Mono Fallback';
+  --font-sans: var(--font-dm-sans), 'DM Sans', sans-serif;
+  --font-serif: var(--font-cormorant-garamond), 'Cormorant Garamond', serif;
+  --font-gujarati: var(--font-gujarati-sans), 'Noto Sans Gujarati', sans-serif;
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -70,57 +53,83 @@
   --color-primary-foreground: var(--primary-foreground);
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
-  --color-muted: var(--muted);
+  --color-muted: var(--muted-tw);
   --color-muted-foreground: var(--muted-foreground);
-  --color-accent: var(--accent);
+  --color-accent: var(--accent-tw);
   --color-accent-foreground: var(--accent-foreground);
   --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
-  --color-chart-1: var(--chart-1);
-  --color-chart-2: var(--chart-2);
-  --color-chart-3: var(--chart-3);
-  --color-chart-4: var(--chart-4);
-  --color-chart-5: var(--chart-5);
-  --radius-sm: calc(var(--radius) - 4px);
-  --radius-md: calc(var(--radius) - 2px);
-  --radius-lg: var(--radius);
+
+  --radius-sm: calc(var(--radius) - 1px);
+  --radius-md: var(--radius);
+  --radius-lg: calc(var(--radius) + 2px);
   --radius-xl: calc(var(--radius) + 4px);
-  
-  /* Custom color tokens */
-  --color-saffron: var(--saffron);
-  --color-mango: var(--mango);
-  --color-cream: var(--cream);
-  --color-forest: var(--forest);
-  --color-gold: var(--gold);
 }
 
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
-  body {
-    @apply bg-background text-foreground;
+  
+  html { 
+    scroll-behavior: smooth; 
+    font-size: 16px; 
   }
+
+  body {
+    @apply bg-background text-foreground font-sans;
+    overflow-x: hidden;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* GRAIN OVERLAY */
+  body::after {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)' opacity='1'/%3E%3C/svg%3E");
+    opacity: 0.032;
+    pointer-events: none;
+    z-index: 9999;
+  }
+
+  /* SCROLLBAR */
+  ::-webkit-scrollbar { width: 3px; }
+  ::-webkit-scrollbar-track { background: var(--bg); }
+  ::-webkit-scrollbar-thumb { background: var(--muted2); border-radius: 2px; }
 }
 
-/* Custom Gujarati text styling */
-.gujarati {
-  font-family: 'Noto Serif Gujarati', 'Noto Sans Gujarati', serif;
-}
+@layer utilities {
+  .font-gujarati {
+    font-family: var(--font-gujarati-sans), 'Noto Sans Gujarati', sans-serif;
+  }
 
-/* Decorative patterns */
-.pattern-paisley {
-  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 5c-8 0-15 7-15 15 0 12 15 25 15 25s15-13 15-25c0-8-7-15-15-15z' fill='%23e8875020' stroke='%23e8875015' stroke-width='1'/%3E%3C/svg%3E");
-}
+  .eyebrow {
+    @apply font-sans text-[0.65rem] tracking-[0.25em] uppercase text-primary mb-6 block;
+  }
 
-/* Gradient backgrounds */
-.gradient-saffron {
-  background: linear-gradient(135deg, oklch(0.65 0.18 50) 0%, oklch(0.75 0.15 65) 100%);
-}
+  .eyebrow-center {
+    @apply text-center;
+  }
 
-.gradient-mango {
-  background: linear-gradient(135deg, oklch(0.82 0.14 90) 0%, oklch(0.88 0.12 80) 100%);
+  .section-divider {
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--border-color), transparent);
+    @apply mx-6 md:mx-16;
+  }
+
+  @keyframes scrollDrop {
+    0%   { transform: scaleY(0); transform-origin: top; opacity: 0; }
+    40%  { transform: scaleY(1); transform-origin: top; opacity: 1; }
+    80%  { transform: scaleY(1); transform-origin: bottom; opacity: 1; }
+    100% { transform: scaleY(0); transform-origin: bottom; opacity: 0; }
+  }
+
+  .animate-scroll-drop {
+    animation: scrollDrop 2.2s ease-in-out infinite;
+  }
 }
