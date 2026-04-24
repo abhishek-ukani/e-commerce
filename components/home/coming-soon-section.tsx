@@ -65,12 +65,12 @@ export default function ComingSoonSection() {
         >
           <h1 className="text-[#FFF8E7] font-bold font-(family-name:--font-gujarati-sans)
                          text-2xl sm:text-4xl md:text-6xl lg:text-7xl leading-tight">
-            ઉતાવળે આંબા ના પાકે,
+            સ્ક્રોલ સાથે આંબું મોટું થાય,
           </h1>
 
           <p className="text-[#A89880] font-(family-name:--font-gujarati-sans)
                         text-lg sm:text-2xl md:text-4xl font-medium mt-2">
-            ભઈ — હજુ થોડી વાર સે.
+            still green, still not ready — વકત આવે ત્યાં સુધી રાહ છે.
           </p>
         </motion.div>
 
@@ -83,8 +83,8 @@ export default function ComingSoonSection() {
           transition={{ duration: 0.6, delay: 0.8 }}
           viewport={{ once: true }}
         >
-          તલાળા ગીર ની કેરી પોતાના ટેમ પર પાકે — ઉતાવળ કરીએ તો સ્વાદ જાય.
-          મે આવે એટલે સૌ'થી પે'લા તમને ખબર પડશે — પક્કી વાત.
+          તળાળા ગીર ની કેરી પોતાના ટેમ પર પાકે — ખૂબ જ વધારે મીઠાશ માટે છાનબીન અને સમય જોઈએ.
+          આ વર્ષનું વર્લ્ડ ક્લાસ પ્રસંગ છે — પહેલો પકવામાં આપને ખબર પડશે.
         </motion.p>
 
         {/* Form */}
