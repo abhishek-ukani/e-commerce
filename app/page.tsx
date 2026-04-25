@@ -12,7 +12,7 @@ const ComingSoonSection = lazy(() => import('@/components/home/coming-soon-secti
 export default function HomePage() {
   return (
     <div className="min-h-screen flex flex-col">
-      {/* <Header /> */}
+      <Header />
       <main className="flex-1">
         <HeroSection />
         <Suspense fallback={<div className="h-96 flex items-center justify-center">Loading...</div>}>

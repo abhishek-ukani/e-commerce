@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>તાલાલા કેસરિયા</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Gujarati:wght@100;200;300;400;500;600;700;800;900&family=Cormorant+Garamond:ital,wght@1,300;1,400;1,500;1,600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --bg:        #111509;
+  --bg-mid:    #181D0C;
+  --gold:      #C8A84B;
+  --gold-lt:   #E2C870;
+  --gold-dk:   #8A6E28;
+  --cream:     #F0E6C8;
+  --muted:     #7A7A5A;
+  --muted2:    #555542;
+}
+
+html { font-size: 16px; }
+body {
+  background: var(--bg);
+  color: var(--cream);
+  font-family: 'DM Sans', sans-serif;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Grain overlay ── */
+body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.68' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+  opacity: 0.038;
+  pointer-events: none;
+  z-index: 9000;
+  mix-blend-mode: overlay;
+}
+
+/* ═══════════════════════════════════
+   NAV
+═══════════════════════════════════ */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 500;
+  padding: 1.4rem 3.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: linear-gradient(to bottom,
+    rgba(17,21,9,0.92) 0%,
+    rgba(17,21,9,0.0) 100%);
+  backdrop-filter: blur(2px);
+}
+
+.nav-left {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  text-decoration: none;
+}
+
+.nav-leaf {
+  width: 18px;
+  height: 18px;
+  opacity: 0.8;
+}
+
+.nav-brand {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--gold);
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+  list-style: none;
+}
+
+.nav-links a {
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.2s;
+  font-weight: 400;
+}
+
+.nav-links a:hover { color: var(--cream); }
+
+.nav-icons {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.nav-icon {
+  color: var(--muted);
+  cursor: pointer;
+  transition: color 0.2s;
+}
+.nav-icon:hover { color: var(--cream); }
+
+/* ═══════════════════════════════════
+   HERO WRAPPER
+═══════════════════════════════════ */
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 640px;
+  overflow: hidden;
+  background: var(--bg);
+}
+
+/* ── Layer 1: Atmospheric background ── */
+.hero-atm {
+  position: absolute;
+  inset: 0;
+  background:
+    /* Spotlight cone from top-center */
+    radial-gradient(ellipse 38% 55% at 62% 0%,
+      rgba(190,170,80,0.11) 0%,
+      rgba(190,170,80,0.04) 45%,
+      transparent 70%),
+    /* Warm horizon glow */
+    radial-gradient(ellipse 80% 30% at 50% 72%,
+      rgba(140,120,40,0.07) 0%,
+      transparent 65%),
+    /* Base gradient */
+    linear-gradient(170deg,
+      #131708 0%,
+      #181D0C 40%,
+      #111509 70%,
+      #0C0F07 100%);
+  z-index: 1;
+}
+
+/* ── Layer 2: Mountains ── */
+.hero-mountains {
+  position: absolute;
+  bottom: 18%;
+  left: 0; right: 0;
+  height: 45%;
+  z-index: 2;
+  will-change: transform;
+}
+
+/* ── Layer 3: Mango image — right side ── */
+.hero-mango {
+  position: absolute;
+  top: -4%;
+  right: -2%;
+  width: 52%;
+  max-width: 620px;
+  z-index: 6;
+  will-change: transform;
+  /* Pendulum pivot at stem top — ~35% from left, 18% from top of image */
+  transform-origin: 37% 18%;
+  animation: mangoSway 5s cubic-bezier(0.37,0,0.63,1) infinite;
+  /* Blend the black background away */
+  mix-blend-mode: lighten;
+  filter: brightness(1.05) contrast(1.08);
+}
+
+@keyframes mangoSway {
+  0%   { transform: rotate(-2.5deg); }
+  25%  { transform: rotate(0deg); }
+  50%  { transform: rotate(2.5deg); }
+  75%  { transform: rotate(0deg); }
+  100% { transform: rotate(-2.5deg); }
+}
+
+/* ── Layer 4: Lions ── */
+.hero-lions {
+  position: absolute;
+  bottom: 0;
+  left: 0; right: 0;
+  height: 42%;
+  z-index: 7;
+  will-change: transform;
+}
+
+/* ── Layer 5: Ground fade ── */
+.hero-ground {
+  position: absolute;
+  bottom: 0;
+  left: 0; right: 0;
+  height: 22%;
+  z-index: 8;
+  background: linear-gradient(to top,
+    #080A05 0%,
+    #0C0F07 50%,
+    transparent 100%);
+  pointer-events: none;
+}
+
+/* ── Layer 6: Typography (left side) ── */
+.hero-text {
+  position: absolute;
+  top: 50%;
+  left: 4.5rem;
+  transform: translateY(-50%);
+  z-index: 10;
+  will-change: transform, opacity;
+}
+
+.hero-tagline-top {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.65rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--gold);
+  opacity: 0.7;
+  margin-bottom: 1.4rem;
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.hero-tagline-top::before {
+  content: '';
+  width: 22px;
+  height: 1px;
+  background: var(--gold);
+  opacity: 0.6;
+  display: block;
+}
+
+/* The big mixed-script headline */
+.hero-headline {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-bottom: 1.6rem;
+}
+
+.headline-gu {
+  font-family: 'Noto Serif Gujarati', serif;
+  font-size: clamp(4.2rem, 7.5vw, 7.2rem);
+  font-weight: 900;
+  line-height: 0.92;
+  letter-spacing: -0.01em;
+  /* Metallic gold gradient */
+  background: linear-gradient(
+    160deg,
+    #E8D080 0%,
+    #C8A848 30%,
+    #D4B858 55%,
+    #A07828 75%,
+    #C8A848 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 2px 24px rgba(200,168,72,0.18));
+}
+
+.headline-en {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(3.6rem, 6.5vw, 6.2rem);
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.0;
+  letter-spacing: 0.01em;
+  background: linear-gradient(
+    160deg,
+    #E8D080 0%,
+    #C8A848 35%,
+    #B89038 60%,
+    #C8A848 100%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  filter: drop-shadow(0 2px 20px rgba(200,168,72,0.14));
+}
+
+/* Gold rule + star ornament */
+.hero-ornament {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.8rem;
+  opacity: 0.55;
+}
+
+.ornament-line {
+  width: 110px;
+  height: 1px;
+  background: linear-gradient(to right, var(--gold), transparent);
+}
+
+.ornament-star {
+  color: var(--gold);
+  font-size: 0.9rem;
+  line-height: 1;
+}
+
+/* Bottom badge strip */
+.hero-badges {
+  position: absolute;
+  bottom: 0;
+  left: 0; right: 0;
+  z-index: 20;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid rgba(200,168,72,0.12);
+  background: rgba(11,14,7,0.82);
+  backdrop-filter: blur(8px);
+}
+
+.badge-item {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 1.1rem 2rem;
+  border-right: 1px solid rgba(200,168,72,0.1);
+  transition: background 0.3s;
+}
+
+.badge-item:last-child { border-right: none; }
+.badge-item:hover { background: rgba(200,168,72,0.04); }
+
+.badge-icon {
+  flex-shrink: 0;
+  width: 22px;
+  height: 22px;
+  color: var(--gold);
+  opacity: 0.7;
+}
+
+.badge-text {}
+.badge-title {
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--cream);
+  display: block;
+  line-height: 1.2;
+}
+.badge-sub {
+  font-size: 0.6rem;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  display: block;
+  margin-top: 0.15rem;
+}
+
+/* Scroll indicator */
+.scroll-cue {
+  position: absolute;
+  bottom: 5.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 15;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  opacity: 0;
+  animation: fadeUp 0.8s ease 2s both;
+}
+
+.scroll-text {
+  font-size: 0.58rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--muted2);
+}
+
+.scroll-line {
+  width: 1px;
+  height: 40px;
+  background: linear-gradient(to bottom, var(--muted2), transparent);
+  animation: scrollPulse 2.4s ease-in-out 2.5s infinite;
+}
+
+@keyframes scrollPulse {
+  0%   { transform: scaleY(0); transform-origin: top; opacity: 0; }
+  45%  { transform: scaleY(1); transform-origin: top; opacity: 1; }
+  80%  { transform: scaleY(1); transform-origin: bottom; opacity: 1; }
+  100% { transform: scaleY(0); transform-origin: bottom; opacity: 0; }
+}
+
+/* ═══════════════════════════════════
+   ENTRY ANIMATIONS
+═══════════════════════════════════ */
+.hero-text {
+  animation: slideUp 1.1s cubic-bezier(0.22,0.61,0.36,1) 0.2s both;
+}
+.hero-mango {
+  /* Keep sway but also do initial drop-in */
+  animation: mangoEntry 1.4s cubic-bezier(0.22,0.61,0.36,1) 0.1s both,
+             mangoSway 5s cubic-bezier(0.37,0,0.63,1) 1.5s infinite;
+}
+.hero-lions {
+  animation: fadeUp 1.6s cubic-bezier(0.22,0.61,0.36,1) 0.4s both;
+}
+.hero-mountains {
+  animation: fadeIn 2s ease 0s both;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(calc(-50% + 28px)); }
+  to   { opacity: 1; transform: translateY(-50%); }
+}
+@keyframes mangoEntry {
+  from { opacity: 0; transform: translateY(-30px) rotate(-2.5deg); }
+  to   { opacity: 1; transform: translateY(0) rotate(-2.5deg); }
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ═══════════════════════════════════
+   BELOW FOLD — proof of scroll
+═══════════════════════════════════ */
+.below {
+  min-height: 60vh;
+  background: #0A0D06;
+  border-top: 1px solid rgba(200,168,72,0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 5rem 2rem;
+  text-align: center;
+}
+.below-inner { max-width: 520px; }
+.below-eyebrow {
+  font-size: 0.62rem;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--gold);
+  opacity: 0.6;
+  margin-bottom: 1.5rem;
+}
+.below-title {
+  font-family: 'Noto Serif Gujarati', serif;
+  font-size: clamp(1.6rem, 3.5vw, 2.6rem);
+  font-weight: 700;
+  color: var(--cream);
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+.below-body {
+  font-family: 'Noto Serif Gujarati', serif;
+  font-size: 0.95rem;
+  color: var(--muted);
+  line-height: 1.9;
+}
+
+@keyframes fadeUp { from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none} }
+</style>
+</head>
+<body>
+
+<!-- ═══════ NAV ═══════ -->
+<nav>
+  <a class="nav-left" href="#">
+    <!-- Leaf SVG icon -->
+    <svg class="nav-leaf" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12 2C6 2 3 8 3 13C3 18 7 22 12 22C17 22 21 18 21 13C21 8 18 2 12 2Z"
+            stroke="#C8A84B" stroke-width="1.2" fill="none"/>
+      <path d="M12 22C12 22 12 12 12 2" stroke="#C8A84B" stroke-width="1" stroke-dasharray="2 2"/>
+      <path d="M12 14C10 12 7 12 6 13" stroke="#C8A84B" stroke-width="1" stroke-linecap="round"/>
+      <path d="M12 10C14 8 17 8 18 10" stroke="#C8A84B" stroke-width="1" stroke-linecap="round"/>
+    </svg>
+    <span class="nav-brand">Talala Kesariya</span>
+  </a>
+
+  <ul class="nav-links">
+    <li><a href="#">Our Story</a></li>
+    <li><a href="#">Benefits</a></li>
+    <li><a href="#">Purity</a></li>
+    <li><a href="#">Shop</a></li>
+  </ul>
+
+  <div class="nav-icons">
+    <!-- Search -->
+    <svg class="nav-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+      <circle cx="11" cy="11" r="7"/><path d="M16.5 16.5L21 21"/>
+    </svg>
+    <!-- Account -->
+    <svg class="nav-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+      <circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+    </svg>
+    <!-- Cart -->
+    <svg class="nav-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+      <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/>
+      <path d="M16 10a4 4 0 01-8 0"/>
+    </svg>
+  </div>
+</nav>
+
+<!-- ═══════ HERO ═══════ -->
+<section class="hero" id="hero">
+
+  <!-- Bg atmosphere -->
+  <div class="hero-atm"></div>
+
+  <!-- Mountains SVG — properly layered, blurred -->
+  <div class="hero-mountains" id="mountains">
+    <svg viewBox="0 0 1440 420" xmlns="http://www.w3.org/2000/svg"
+         width="100%" height="100%" preserveAspectRatio="xMidYMax slice">
+      <defs>
+        <filter id="mblur1"><feGaussianBlur stdDeviation="6"/></filter>
+        <filter id="mblur2"><feGaussianBlur stdDeviation="3"/></filter>
+        <filter id="mblur3"><feGaussianBlur stdDeviation="1.2"/></filter>
+        <linearGradient id="mtn1" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#1E2410" stop-opacity="0.55"/>
+          <stop offset="100%" stop-color="#111509" stop-opacity="0.9"/>
+        </linearGradient>
+        <linearGradient id="mtn2" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#222814" stop-opacity="0.7"/>
+          <stop offset="100%" stop-color="#111509" stop-opacity="0.95"/>
+        </linearGradient>
+        <linearGradient id="mtn3" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#2A3018" stop-opacity="0.8"/>
+          <stop offset="100%" stop-color="#111509" stop-opacity="1"/>
+        </linearGradient>
+      </defs>
+
+      <!-- Layer 1: Far mountains, very blurred -->
+      <path d="M0 420 L0 260 Q80 200 160 230 Q240 260 320 180 Q400 100 480 160
+               Q560 220 640 140 Q720 60 800 130 Q880 200 960 150
+               Q1040 100 1120 170 Q1200 240 1280 190 Q1360 140 1440 200 L1440 420Z"
+            fill="url(#mtn1)" filter="url(#mblur1)"/>
+
+      <!-- Layer 2: Mid mountains -->
+      <path d="M0 420 L0 300 Q100 240 200 270 Q300 300 400 220
+               Q480 160 560 210 Q640 260 720 190 Q800 120 880 180
+               Q960 240 1040 200 Q1120 160 1200 220 Q1320 280 1440 240 L1440 420Z"
+            fill="url(#mtn2)" filter="url(#mblur2)"/>
+
+      <!-- Layer 3: Closer hills -->
+      <path d="M0 420 L0 340 Q120 290 240 320 Q340 345 440 290
+               Q520 250 600 280 Q680 310 760 270 Q840 230 920 270
+               Q1000 310 1100 285 Q1220 258 1340 300 Q1400 320 1440 310 L1440 420Z"
+            fill="url(#mtn3)" filter="url(#mblur3)"/>
+
+      <!-- Left palm tree — tall, graceful -->
+      <g opacity="0.6">
+        <!-- Trunk — leans slightly right -->
+        <path d="M95 420 Q100 360 108 310 Q114 270 118 240"
+              stroke="#1A1C0E" stroke-width="7" fill="none" stroke-linecap="round"/>
+        <!-- Fronds radiating from crown -->
+        <path d="M118 240 Q90 210 65 200"  stroke="#1E2210" stroke-width="5" fill="none" stroke-linecap="round"/>
+        <path d="M118 240 Q100 205 88 185" stroke="#1E2210" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+        <path d="M118 240 Q112 200 112 175" stroke="#1E2210" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+        <path d="M118 240 Q128 202 138 188" stroke="#1E2210" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+        <path d="M118 240 Q140 215 160 210" stroke="#1E2210" stroke-width="5" fill="none" stroke-linecap="round"/>
+        <path d="M118 240 Q148 225 165 228" stroke="#1E2210" stroke-width="4" fill="none" stroke-linecap="round"/>
+        <!-- Draping frond tips -->
+        <path d="M65 200 Q52 210 42 218"   stroke="#1E2210" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        <path d="M88 185 Q78 196 70 206"   stroke="#1E2210" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <path d="M138 188 Q148 200 152 212" stroke="#1E2210" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <path d="M160 210 Q172 218 178 226" stroke="#1E2210" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      </g>
+
+      <!-- Left palm 2 — smaller, behind -->
+      <g opacity="0.35" transform="translate(-15,25)">
+        <path d="M55 420 Q58 370 62 330 Q65 300 68 275"
+              stroke="#161808" stroke-width="5" fill="none" stroke-linecap="round"/>
+        <path d="M68 275 Q50 252 34 246"  stroke="#161808" stroke-width="4" fill="none" stroke-linecap="round"/>
+        <path d="M68 275 Q56 248 50 232"  stroke="#161808" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+        <path d="M68 275 Q68 242 70 222"  stroke="#161808" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+        <path d="M68 275 Q82 248 90 238"  stroke="#161808" stroke-width="3.5" fill="none" stroke-linecap="round"/>
+        <path d="M68 275 Q90 262 102 260" stroke="#161808" stroke-width="4" fill="none" stroke-linecap="round"/>
+      </g>
+
+      <!-- Right palm tree -->
+      <g opacity="0.55">
+        <path d="M1340 420 Q1334 362 1328 315 Q1322 275 1318 248"
+              stroke="#1A1C0E" stroke-width="7" fill="none" stroke-linecap="round"/>
+        <path d="M1318 248 Q1296 222 1275 215"  stroke="#1E2210" stroke-width="5" fill="none" stroke-linecap="round"/>
+        <path d="M1318 248 Q1306 218 1300 200"  stroke="#1E2210" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+        <path d="M1318 248 Q1318 212 1318 192"  stroke="#1E2210" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+        <path d="M1318 248 Q1332 215 1342 202"  stroke="#1E2210" stroke-width="4.5" fill="none" stroke-linecap="round"/>
+        <path d="M1318 248 Q1345 225 1365 220"  stroke="#1E2210" stroke-width="5" fill="none" stroke-linecap="round"/>
+        <path d="M1318 248 Q1350 236 1370 238"  stroke="#1E2210" stroke-width="4" fill="none" stroke-linecap="round"/>
+        <path d="M1275 215 Q1260 226 1250 234"  stroke="#1E2210" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+        <path d="M1300 200 Q1290 212 1284 222"  stroke="#1E2210" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <path d="M1342 202 Q1352 214 1356 226"  stroke="#1E2210" stroke-width="2" fill="none" stroke-linecap="round"/>
+        <path d="M1365 220 Q1378 228 1384 238"  stroke="#1E2210" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+      </g>
+
+      <!-- Atmospheric ground haze -->
+      <ellipse cx="720" cy="420" rx="800" ry="30"
+               fill="#1A1E0E" opacity="0.5"/>
+    </svg>
+  </div>
+
+  <!-- MANGO IMAGE — right side, actual photograph -->
+  <img
+    class="hero-mango"
+    id="mangoImg"
+    src="mango_hero.png"
+    alt="Kesar mango hanging from branch"
+  />
+
+  <!-- LIONS — properly shaped SVG silhouettes -->
+  <div class="hero-lions" id="lions">
+    <svg id="lionSvg" viewBox="0 0 1440 300" xmlns="http://www.w3.org/2000/svg"
+         width="100%" height="100%" preserveAspectRatio="xMidYMax meet">
+      <defs>
+        <filter id="glow">
+          <feGaussianBlur stdDeviation="3" result="b"/>
+          <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+        </filter>
+        <!-- Reflection gradient -->
+        <linearGradient id="reflGrad" x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0%" stop-color="#C8A84B" stop-opacity="0.07"/>
+          <stop offset="100%" stop-color="#C8A84B" stop-opacity="0"/>
+        </linearGradient>
+      </defs>
+
+      <!-- ═══ LION A — far left, smallest (depth), lying ═══ -->
+      <g transform="translate(80,195) scale(0.6)" opacity="0.45">
+        <!-- Body — lying, haunches raised -->
+        <path d="M120 40 C100 30 60 25 20 32 C-10 38 -25 52 -20 65
+                 C-15 78 10 85 50 82 C90 79 120 68 120 40Z"
+              fill="#0E1008"/>
+        <!-- Head — facing left, low to ground -->
+        <path d="M-20 50 C-35 35 -62 30 -78 42 C-94 54 -90 72 -72 78
+                 C-54 84 -32 78 -20 65Z"
+              fill="#0E1008"/>
+        <!-- Mane mass -->
+        <ellipse cx="-55" cy="55" rx="28" ry="26" fill="#090B06"/>
+        <!-- Face -->
+        <circle cx="-55" cy="55" r="18" fill="#0E1008"/>
+        <!-- Ear tips -->
+        <path d="M-70 38 L-64 26 L-54 36Z" fill="#090B06"/>
+        <path d="M-46 35 L-40 23 L-32 34Z" fill="#090B06"/>
+        <!-- Legs tucked under -->
+        <path d="M80 75 L82 100 Q82 108 76 108 Q70 108 70 100 L70 78Z" fill="#0C0E08"/>
+        <path d="M40 80 L42 106 Q42 114 36 114 Q30 114 30 106 L28 82Z" fill="#0C0E08"/>
+        <!-- Tail -->
+        <path d="M120 45 Q145 28 152 38 Q159 48 148 56 Q140 62 130 55"
+              stroke="#090B06" stroke-width="6" fill="none" stroke-linecap="round"/>
+        <ellipse cx="150" cy="42" rx="10" ry="11" fill="#080A05"/>
+        <!-- Ground shadow -->
+        <ellipse cx="48" cy="112" rx="90" ry="8" fill="#060806" opacity="0.6"/>
+        <!-- Water reflection -->
+        <g transform="translate(0,118) scale(1,-0.18)" opacity="0.5">
+          <path d="M120 40 C100 30 60 25 20 32 C-10 38 -25 52 -20 65
+                   C-15 78 10 85 50 82 C90 79 120 68 120 40Z" fill="url(#reflGrad)"/>
+          <ellipse cx="-55" cy="55" rx="28" ry="26" fill="url(#reflGrad)"/>
+        </g>
+      </g>
+
+      <!-- ═══ LION B — left, sitting upright ═══ -->
+      <g transform="translate(248,148) scale(0.82)" opacity="0.65">
+        <!-- Haunches — sitting -->
+        <path d="M50 120 C30 110 -10 108 -30 115 C-50 122 -55 140 -45 152
+                 C-35 164 10 168 50 162 C80 157 92 140 50 120Z"
+              fill="#0C0E08"/>
+        <!-- Upper body leaning forward -->
+        <path d="M0 120 C-15 95 -20 65 -10 45 C0 25 20 18 32 25
+                 C44 32 48 55 40 80 C32 105 18 118 0 120Z"
+              fill="#0E1008"/>
+        <!-- Neck -->
+        <path d="M10 45 Q5 25 0 10" stroke="#0E1008" stroke-width="20" stroke-linecap="round" fill="none"/>
+        <!-- Mane — thick, dark -->
+        <circle cx="0" cy="0" r="42" fill="#070906"/>
+        <circle cx="0" cy="0" r="32" fill="#0A0C07"/>
+        <circle cx="0" cy="0" r="22" fill="#0E1008"/>
+        <!-- Face -->
+        <circle cx="0" cy="2" r="16" fill="#111408"/>
+        <!-- Eyes — subtle light catch -->
+        <ellipse cx="-6" cy="-1" rx="3.5" ry="3" fill="#060806"/>
+        <ellipse cx="6"  cy="-1" rx="3.5" ry="3" fill="#060806"/>
+        <ellipse cx="-5" cy="-2" rx="1.2" ry="1" fill="#1A2010" opacity="0.6"/>
+        <ellipse cx="7"  cy="-2" rx="1.2" ry="1" fill="#1A2010" opacity="0.6"/>
+        <!-- Snout -->
+        <path d="M-8 8 Q0 16 8 8 Q4 4 0 5 Q-4 4 -8 8Z" fill="#0A0C07"/>
+        <!-- Ears inside mane -->
+        <path d="M-28 -30 L-20 -44 L-10 -30Z" fill="#060806"/>
+        <path d="M10  -32 L18  -46 L26 -30Z"  fill="#060806"/>
+        <!-- Front paws on ground -->
+        <path d="M-20 148 L-22 172 Q-22 180 -30 180 Q-38 180 -38 172 L-36 150Z" fill="#0C0E08"/>
+        <path d="M20  148 L22  172 Q22  180 14  180 Q6   180 6   172 L4  150Z"   fill="#0C0E08"/>
+        <!-- Paw pads suggestion -->
+        <ellipse cx="-34" cy="180" rx="10" ry="5" fill="#0A0C07"/>
+        <ellipse cx="10"  cy="180" rx="10" ry="5" fill="#0A0C07"/>
+        <!-- Tail curled beside -->
+        <path d="M70 155 Q95 135 100 150 Q105 165 90 172 Q78 178 68 168"
+              stroke="#0A0C07" stroke-width="7" fill="none" stroke-linecap="round"/>
+        <ellipse cx="98" cy="152" rx="11" ry="13" fill="#070906"/>
+        <!-- Ground shadow + reflection -->
+        <ellipse cx="8" cy="184" rx="75" ry="7" fill="#050705" opacity="0.7"/>
+        <g transform="translate(0,192) scale(1,-0.2)" opacity="0.45">
+          <circle cx="0" cy="0" r="42" fill="url(#reflGrad)"/>
+          <path d="M50 120 C30 110 -10 108 -30 115 C-50 122 -55 140 -45 152
+                   C-35 164 10 168 50 162 C80 157 92 140 50 120Z" fill="url(#reflGrad)"/>
+        </g>
+      </g>
+
+      <!-- ═══ LION C — center-left, large standing, FACING RIGHT ═══ -->
+      <g transform="translate(500,110) scale(1.08)" opacity="0.88" filter="url(#glow)">
+        <!-- Body — long, muscular, walking stance -->
+        <path d="M140 80 C110 62 70 55 30 58 C-10 61 -35 75 -30 95
+                 C-25 115 20 125 80 122 C140 119 168 100 140 80Z"
+              fill="#0E1008"/>
+        <!-- Chest / shoulder mass -->
+        <path d="M-30 75 C-48 55 -52 30 -38 12 C-24 -6 0 -8 14 5
+                 C28 18 28 45 12 68 C-4 91 -22 95 -30 75Z"
+              fill="#111408"/>
+        <!-- Neck -->
+        <path d="M-12 12 Q-18 -8 -22 -28" stroke="#111408" stroke-width="24"
+              stroke-linecap="round" fill="none"/>
+        <!-- Mane — full and dark -->
+        <circle cx="-28" cy="-42" r="52" fill="#060806"/>
+        <circle cx="-28" cy="-42" r="42" fill="#090B07"/>
+        <circle cx="-28" cy="-42" r="30" fill="#0C0E08"/>
+        <!-- Face — looking right -->
+        <circle cx="-28" cy="-40" r="22" fill="#111408"/>
+        <!-- Eyes -->
+        <ellipse cx="-38" cy="-43" rx="4.5" ry="4" fill="#070906"/>
+        <ellipse cx="-18" cy="-43" rx="4.5" ry="4" fill="#070906"/>
+        <ellipse cx="-37" cy="-44" rx="1.5" ry="1.2" fill="#1E2812" opacity="0.7"/>
+        <ellipse cx="-17" cy="-44" rx="1.5" ry="1.2" fill="#1E2812" opacity="0.7"/>
+        <!-- Nose + snout -->
+        <ellipse cx="-28" cy="-32" rx="12" ry="8" fill="#0A0C08"/>
+        <path d="M-36 -28 Q-28 -22 -20 -28 Q-24 -25 -28 -24 Q-32 -25 -36 -28Z"
+              fill="#080A06"/>
+        <!-- Ears -->
+        <path d="M-56 -76 L-46 -92 L-32 -76Z" fill="#060806"/>
+        <path d="M-24 -78 L-14 -94 L-2  -76Z" fill="#060806"/>
+        <!-- Legs — 4 walking stance -->
+        <!-- Front legs -->
+        <path d="M-15 108 L-16 155 Q-16 165 -24 165 Q-32 165 -32 155 L-30 110Z"
+              fill="#0C0E08"/>
+        <path d="M10 110 L11 158 Q11 168 3 168 Q-5 168 -5 158 L-4 112Z"
+              fill="#0C0E08"/>
+        <!-- Back legs -->
+        <path d="M90 110 L92 158 Q92 168 84 168 Q76 168 76 158 L74 112Z"
+              fill="#0C0E08"/>
+        <path d="M118 106 L120 152 Q120 162 112 162 Q104 162 104 152 L102 108Z"
+              fill="#0C0E08"/>
+        <!-- Paws -->
+        <ellipse cx="-28" cy="166" rx="13" ry="6" fill="#0A0C07"/>
+        <ellipse cx="0"   cy="169" rx="13" ry="6" fill="#0A0C07"/>
+        <ellipse cx="80"  cy="169" rx="13" ry="6" fill="#0A0C07"/>
+        <ellipse cx="108" cy="163" rx="13" ry="6" fill="#0A0C07"/>
+        <!-- Tail — arching over back -->
+        <path d="M140 82 Q172 52 182 68 Q192 84 178 98 Q165 110 152 100"
+              stroke="#0A0C07" stroke-width="8" fill="none" stroke-linecap="round"/>
+        <ellipse cx="180" cy="72" rx="13" ry="15" fill="#060806"/>
+        <!-- Ground shadow -->
+        <ellipse cx="55" cy="174" rx="120" ry="9" fill="#040604" opacity="0.8"/>
+        <!-- Water reflection -->
+        <g transform="translate(0,180) scale(1,-0.22)" opacity="0.5">
+          <path d="M140 80 C110 62 70 55 30 58 C-10 61 -35 75 -30 95
+                   C-25 115 20 125 80 122 C140 119 168 100 140 80Z" fill="url(#reflGrad)"/>
+          <circle cx="-28" cy="-42" r="52" fill="url(#reflGrad)"/>
+        </g>
+      </g>
+
+      <!-- ═══ LION D — center-right, medium, facing left ═══ -->
+      <g transform="translate(870,132) scale(0.88)" opacity="0.72">
+        <!-- Body -->
+        <path d="M-120 72 C-90 55 -50 50 -10 54 C30 58 55 72 50 90
+                 C45 108 0 118 -60 115 C-120 112 -148 92 -120 72Z"
+              fill="#0C0E08"/>
+        <!-- Head — facing LEFT -->
+        <path d="M50 70 C65 52 68 28 55 12 C42 -4 22 -5 10 8
+                 C-2 21 -2 46 12 68Z"
+              fill="#0E1008"/>
+        <path d="M28 8 Q22 -12 18 -30" stroke="#0E1008" stroke-width="20"
+              stroke-linecap="round" fill="none"/>
+        <!-- Mane -->
+        <circle cx="22" cy="-42" r="46" fill="#070906"/>
+        <circle cx="22" cy="-42" r="36" fill="#0A0C07"/>
+        <circle cx="22" cy="-42" r="26" fill="#0E1008"/>
+        <circle cx="22" cy="-42" r="18" fill="#111408"/>
+        <!-- Face -->
+        <ellipse cx="30" cy="-42" rx="4" ry="3.5" fill="#070906"/>
+        <ellipse cx="14" cy="-42" rx="4" ry="3.5" fill="#070906"/>
+        <ellipse cx="22" cy="-32" rx="11" ry="7" fill="#090B07"/>
+        <!-- Ears -->
+        <path d="M4  -78 L10 -94 L22 -78Z"  fill="#070906"/>
+        <path d="M36 -76 L44 -92 L54 -76Z"  fill="#070906"/>
+        <!-- Legs -->
+        <path d="M-90 102 L-92 145 Q-92 154 -100 154 Q-108 154 -108 145 L-106 104Z" fill="#0C0E08"/>
+        <path d="M-55 105 L-56 148 Q-56 157  -64 157 Q-72  157 -72  148 L-70  107Z" fill="#0C0E08"/>
+        <path d="M-10 104 L-10 147 Q-10 156 -18 156 Q-26 156 -26 147 L-25 106Z"    fill="#0C0E08"/>
+        <path d="M28  102 L29  144 Q29  153  21  153 Q13  153  13  144 L12  104Z"   fill="#0C0E08"/>
+        <!-- Paws -->
+        <ellipse cx="-104" cy="155" rx="12" ry="5" fill="#0A0C07"/>
+        <ellipse cx="-68"  cy="158" rx="12" ry="5" fill="#0A0C07"/>
+        <ellipse cx="-22"  cy="157" rx="12" ry="5" fill="#0A0C07"/>
+        <ellipse cx="17"   cy="154" rx="12" ry="5" fill="#0A0C07"/>
+        <!-- Tail -->
+        <path d="M-120 78 Q-150 55 -158 68 Q-166 81 -154 93 Q-142 104 -130 95"
+              stroke="#090B07" stroke-width="7" fill="none" stroke-linecap="round"/>
+        <ellipse cx="-156" cy="70" rx="12" ry="13" fill="#060806"/>
+        <!-- Ground shadow + reflection -->
+        <ellipse cx="-40" cy="162" rx="110" ry="8" fill="#040604" opacity="0.7"/>
+        <g transform="translate(0,168) scale(1,-0.2)" opacity="0.4">
+          <path d="M-120 72 C-90 55 -50 50 -10 54 C30 58 55 72 50 90
+                   C45 108 0 118 -60 115 C-120 112 -148 92 -120 72Z" fill="url(#reflGrad)"/>
+          <circle cx="22" cy="-42" r="46" fill="url(#reflGrad)"/>
+        </g>
+      </g>
+
+      <!-- ═══ LION E — right side, lioness lying relaxed ═══ -->
+      <g transform="translate(1160,195) scale(0.75)" opacity="0.58">
+        <!-- Whole lying body — elongated -->
+        <path d="M160 30 C130 18 80 12 30 16 C-20 20 -55 35 -50 52
+                 C-45 69 10 78 80 75 C150 72 185 55 160 30Z"
+              fill="#0C0E08"/>
+        <!-- Head resting low, facing left -->
+        <path d="M-50 38 C-68 22 -98 18 -115 30 C-132 42 -128 60 -108 68
+                 C-88 76 -62 70 -50 52Z"
+              fill="#0E1008"/>
+        <!-- No mane — lioness -->
+        <circle cx="-88" cy="46" r="26" fill="#0C0E08"/>
+        <circle cx="-88" cy="46" r="18" fill="#0E1008"/>
+        <!-- Eyes -->
+        <ellipse cx="-96" cy="43" rx="3" ry="2.5" fill="#060806"/>
+        <ellipse cx="-80" cy="43" rx="3" ry="2.5" fill="#060806"/>
+        <!-- Snout -->
+        <ellipse cx="-88" cy="54" rx="9" ry="6" fill="#0A0C07"/>
+        <!-- Ears -->
+        <path d="M-108 26 L-100 14 L-90 26Z" fill="#090B06"/>
+        <path d="M-86  24 L-78  12 L-68 24Z" fill="#090B06"/>
+        <!-- Front paws stretched forward -->
+        <path d="M-120 58 L-155 65 Q-168 67 -168 58 Q-168 49 -155 48 L-118 50Z" fill="#0C0E08"/>
+        <path d="M-100 65 L-132 74 Q-145 76 -145 67 Q-145 58 -132 56 L-98 58Z"  fill="#0C0E08"/>
+        <!-- Paw ellipses -->
+        <ellipse cx="-162" cy="57" rx="10" ry="7" fill="#0A0C07"/>
+        <ellipse cx="-140" cy="65" rx="10" ry="7" fill="#0A0C07"/>
+        <!-- Back haunch high -->
+        <ellipse cx="120" cy="22" rx="48" ry="28" fill="#0A0C07"/>
+        <!-- Tail -->
+        <path d="M160 32 Q188 12 196 24 Q204 36 190 46 Q178 54 166 44"
+              stroke="#090B07" stroke-width="6" fill="none" stroke-linecap="round"/>
+        <ellipse cx="194" cy="26" rx="11" ry="12" fill="#070906"/>
+        <!-- Ground shadow + reflection -->
+        <ellipse cx="20" cy="80" rx="130" ry="7" fill="#040604" opacity="0.65"/>
+        <g transform="translate(0,86) scale(1,-0.18)" opacity="0.4">
+          <path d="M160 30 C130 18 80 12 30 16 C-20 20 -55 35 -50 52
+                   C-45 69 10 78 80 75 C150 72 185 55 160 30Z" fill="url(#reflGrad)"/>
+          <circle cx="-88" cy="46" r="26" fill="url(#reflGrad)"/>
+        </g>
+      </g>
+
+      <!-- ═══ LION F — far right, small (depth) standing ═══ -->
+      <g transform="translate(1345,188) scale(0.55)" opacity="0.38">
+        <path d="M120 65 C95 52 58 48 22 52 C-14 56 -35 70 -30 86
+                 C-25 102 18 110 72 108 C126 106 148 88 120 65Z"
+              fill="#0C0E08"/>
+        <path d="M-30 68 C-46 50 -50 26 -38 10 C-26 -6 -6 -8 6 5
+                 C18 18 18 44 6 65Z"
+              fill="#0E1008"/>
+        <path d="M-10 5 Q-14 -14 -18 -32" stroke="#0E1008" stroke-width="18"
+              stroke-linecap="round" fill="none"/>
+        <circle cx="-22" cy="-44" r="40" fill="#070906"/>
+        <circle cx="-22" cy="-44" r="30" fill="#0A0C07"/>
+        <circle cx="-22" cy="-44" r="20" fill="#0E1008"/>
+        <path d="M-40 -76 L-33 -90 L-22 -77Z" fill="#070906"/>
+        <path d="M-20 -78 L-12 -92 L-2  -77Z" fill="#070906"/>
+        <path d="M-10 95  L-10 135 Q-10 143 -17 143 Q-24 143 -24 135 L-22 97Z"  fill="#0C0E08"/>
+        <path d="M14  97  L15  137 Q15  145  8  145 Q1   145  1   137 L0   99Z"   fill="#0C0E08"/>
+        <path d="M74  95  L75  134 Q75  142  68 142 Q61  142  61  134 L60  97Z"  fill="#0C0E08"/>
+        <path d="M100 92  L101 130 Q101 138 94 138 Q87 138 87 130 L86 94Z"       fill="#0C0E08"/>
+        <path d="M120 68 Q145 48 152 60 Q159 72 148 82 Q138 90 128 82"
+              stroke="#0A0C07" stroke-width="6" fill="none" stroke-linecap="round"/>
+        <ellipse cx="150" cy="62" rx="11" ry="12" fill="#060806"/>
+        <ellipse cx="30" cy="148" rx="90" ry="7" fill="#040604" opacity="0.6"/>
+      </g>
+
+      <!-- Full ground water line -->
+      <line x1="0" y1="254" x2="1440" y2="254"
+            stroke="#1A1E0E" stroke-width="0.5" opacity="0.4"/>
+    </svg>
+  </div>
+
+  <!-- Ground fade -->
+  <div class="hero-ground"></div>
+
+  <!-- Typography — LEFT SIDE -->
+  <div class="hero-text" id="heroText">
+    <div class="hero-tagline-top">
+      Talala · Gir Forest · Gujarat
+    </div>
+
+    <div class="hero-headline">
+      <span class="headline-gu">તાલાલા</span>
+      <span class="headline-en">Kesariya</span>
+    </div>
+
+    <div class="hero-ornament">
+      <div class="ornament-line"></div>
+      <span class="ornament-star">✦</span>
+    </div>
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="scroll-cue">
+    <span class="scroll-text">Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+
+  <!-- Badge strip -->
+  <div class="hero-badges">
+    <!-- Single Origin -->
+    <div class="badge-item">
+      <svg class="badge-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
+        <circle cx="12" cy="12" r="3"/>
+        <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/>
+      </svg>
+      <div class="badge-text">
+        <span class="badge-title">Single Origin</span>
+        <span class="badge-sub">Gir Forest</span>
+      </div>
+    </div>
+    <!-- Sustainably Grown -->
+    <div class="badge-item">
+      <svg class="badge-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
+        <path d="M12 2C6 2 3 8 3 13c0 5 4 9 9 9s9-4 9-9C21 8 18 2 12 2z"/>
+        <path d="M12 22V12M12 12C10 10 7 10 6 11M12 12c2-2 5-2 6-1"/>
+      </svg>
+      <div class="badge-text">
+        <span class="badge-title">Sustainably Grown</span>
+        <span class="badge-sub">Zero Chemicals</span>
+      </div>
+    </div>
+    <!-- Limited Harvest -->
+    <div class="badge-item">
+      <svg class="badge-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
+        <circle cx="12" cy="12" r="9"/>
+        <path d="M12 7v5l3 3"/>
+      </svg>
+      <div class="badge-text">
+        <span class="badge-title">Limited Harvest</span>
+        <span class="badge-sub">May · Jun · Jul</span>
+      </div>
+    </div>
+    <!-- Trusted -->
+    <div class="badge-item">
+      <svg class="badge-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4">
+        <path d="M12 2L4 6v6c0 5.5 3.8 10.7 8 12 4.2-1.3 8-6.5 8-12V6L12 2z"/>
+        <path d="M9 12l2 2 4-4"/>
+      </svg>
+      <div class="badge-text">
+        <span class="badge-title">Trusted by</span>
+        <span class="badge-sub">Generations</span>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- Below fold -->
+<section class="below">
+  <div class="below-inner">
+    <p class="below-eyebrow">Season 2026 · Coming Soon</p>
+    <h2 class="below-title">ઉતાવળે આંબા ના પાકે</h2>
+    <p class="below-body">
+      A mango ripened in a hurry tastes of nothing.<br>
+      We wait. Every single year.
+    </p>
+  </div>
+</section>
+
+<script>
+/* ════════════════════════════════
+   PARALLAX on scroll
+════════════════════════════════ */
+const mountains = document.getElementById('mountains');
+const mangoImg  = document.getElementById('mangoImg');
+const lions     = document.getElementById('lions');
+const heroText  = document.getElementById('heroText');
+const lionSvg   = document.getElementById('lionSvg');
+
+let ticking = false;
+
+window.addEventListener('scroll', () => {
+  if (!ticking) { requestAnimationFrame(onScroll); ticking = true; }
+}, { passive: true });
+
+function onScroll() {
+  const s  = window.scrollY;
+  const vh = window.innerHeight;
+  if (s > vh * 1.1) { ticking = false; return; }
+
+  const p = s / vh;
+
+  // Mountains — slowest, drift up gently
+  mountains.style.transform = `translateY(${s * 0.10}px)`;
+
+  // Mango — mid speed, also slight horizontal drift
+  // Keep the sway animation running, just translate
+  mangoImg.style.marginTop = `${s * 0.14}px`;
+
+  // Text — rises and fades
+  heroText.style.transform = `translateY(calc(-50% + ${s * 0.22}px))`;
+  heroText.style.opacity   = String(Math.max(0, 1 - p * 2.5));
+
+  // Lions — fastest (closest), drift apart slightly on scroll
+  lions.style.transform = `translateY(${s * 0.28}px)`;
+
+  // Lions drift outward subtly as you scroll
+  if (lionSvg) {
+    lionSvg.style.transform = `scaleX(${1 + p * 0.04})`;
+  }
+
+  ticking = false;
+}
+
+/* ════════════════════════════════
+   LION BREATHING — subtle life
+════════════════════════════════ */
+const lionGroups = document.querySelectorAll('#lionSvg > g');
+let bt = 0;
+
+function breathe() {
+  bt += 0.006;
+  lionGroups.forEach((g, i) => {
+    const phase   = i * 1.1;
+    const breathY = Math.sin(bt + phase) * 0.9;
+    const baseT   = g.getAttribute('transform') || '';
+    // Only apply if we haven't already patched — use CSS var instead
+    g.style.marginTop = `${breathY}px`;
+  });
+  requestAnimationFrame(breathe);
+}
+// Apply breathe via translateY on each group's wrapper element
+// Use a cleaner approach — CSS animation per group with delay
+lionGroups.forEach((g, i) => {
+  g.style.animationName      = 'lionBreathe';
+  g.style.animationDuration  = `${3.8 + i * 0.5}s`;
+  g.style.animationDelay     = `${i * 0.4}s`;
+  g.style.animationTimingFunction = 'ease-in-out';
+  g.style.animationIterationCount = 'infinite';
+  g.style.animationDirection = i % 2 === 0 ? 'normal' : 'alternate';
+});
+</script>
+
+<style>
+@keyframes lionBreathe {
+  0%   { transform: translateY(0px); }
+  50%  { transform: translateY(-2px); }
+  100% { transform: translateY(0px); }
+}
+</style>
+
+</body>
+</html>

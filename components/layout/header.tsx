@@ -14,7 +14,7 @@ export function Header() {
   const { isAuthenticated } = useAuth()
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-border/40 bg-card/80 backdrop-blur-md">
+    <header className="fixed top-0 left-0 right-0 z-50 w-full border-b border-white/10 bg-[linear-gradient(to_bottom,rgba(17,21,9,0.92)_0%,rgba(17,21,9,0)_100%)] backdrop-blur-sm">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           {/* Logo */}
