@@ -246,7 +246,7 @@ export function KesarStory() {
   }, []);
 
   return (
-    <div id="product-details" className="relative w-full bg-background">
+    <div id="kesar-story"  className="relative w-full bg-background">
       {/* Section Title */}
       <div className="sticky top-0 left-0 z-20 p-6 md:p-8 pointer-events-none">
         <span className="text-[#E8820C] text-lg tracking-[0.3em] uppercase">The Kesar Story</span>

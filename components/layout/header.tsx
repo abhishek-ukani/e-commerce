@@ -1,94 +1,91 @@
 'use client'
 
 import Link from 'next/link'
-import { useState } from 'react'
+import { useState, useRef } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { ShoppingCart, User, Menu, X } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { useCart } from '@/components/providers/cart-provider'
 import { useAuth } from '@/components/providers/auth-provider'
 
+
+
 export function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const { totalItems, isHydrated } = useCart()
   const { isAuthenticated } = useAuth()
+  const navRef = useRef<HTMLElement>(null);
+  const NAV_LINKS = [
+    { label: 'Kesar Story', href: '#kesar-story' },
+    { label: 'Coming Soon', href: '#coming-soon' },
+  ];
+
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 w-full border-b border-white/10 bg-[linear-gradient(to_bottom,rgba(17,21,9,0.92)_0%,rgba(17,21,9,0)_100%)] backdrop-blur-sm">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
-          {/* Logo */}
-          <Link href="/" className="flex items-center gap-3">
-            <div className="relative">
-              <div className="h-10 w-10 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center">
-                <span className="text-primary-foreground font-bold text-lg">TK</span>
-              </div>
-            </div>
-            <div className="hidden sm:block">
-              <h1 className="font-semibold text-foreground text-lg leading-tight">Talala Kesariya</h1>
-              <p className="text-xs text-muted-foreground font-[family-name:var(--font-gujarati-sans)]">તલાળા કેસરિયા</p>
-            </div>
-          </Link>
+          {/* NAV */}
+          <nav
+            ref={navRef}
+            className="fixed top-0 left-0 right-0 z-[300] flex items-center justify-between px-12 py-5
+                   transition-all duration-400"
+            style={{
+              background: 'linear-gradient(to bottom,rgba(5,14,6,0.88) 0%,transparent 100%)',
+            }}
+          >
+            {/* Logo */}
+            <a href="/" className="flex items-center gap-2.5 no-underline">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" className="opacity-75">
+                <path d="M12 3C7.5 3 4 8 4 12.5c0 4 3.2 7.5 8 8.5 4.8-1 8-4.5 8-8.5C20 8 16.5 3 12 3z"
+                  stroke="#A8C870" strokeWidth="1.2" />
+                <path d="M12 21V13" stroke="#A8C870" strokeWidth="1" strokeDasharray="2 2.5" />
+                <path d="M12 16c-2.5-1.5-4.5-1-5.5 0" stroke="#A8C870" strokeWidth="1" strokeLinecap="round" />
+                <path d="M12 13c2.5-1.5 4.5-1 5.5 0" stroke="#A8C870" strokeWidth="1" strokeLinecap="round" />
+              </svg>
+              <span className="text-[0.65rem] font-medium tracking-[0.26em] uppercase"
+                style={{ color: '#C8A84B' }}>
+                Talala Kesariya
+              </span>
+            </a>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-6">
-            <Link 
-              href="/" 
-              className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-            >
-              Home
-            </Link>
-            <Link 
-              href="/#product" 
-              className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-            >
-              Our Mangoes
-            </Link>
-            <Link 
-              href="/#about" 
-              className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-            >
-              About Us
-            </Link>
+            {/* Links — hidden on mobile */}
+            <ul className="hidden md:flex gap-10 list-none">
+              {NAV_LINKS.map(link => (
+                <li key={link.label}>
+                  <a
+                    href={link.href}
+                    className="text-[0.7rem] tracking-[0.1em] no-underline transition-colors duration-200"
+                    style={{ color: 'rgba(200,215,170,0.5)' }}
+                    onMouseEnter={e => (e.currentTarget.style.color = '#EDE5C8')}
+                    onMouseLeave={e => (e.currentTarget.style.color = 'rgba(200,215,170,0.5)')}>
+                    {link.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+
+            {/* Icons */}
+            <div className="flex items-center gap-5">
+
+              {/* Account */}
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                strokeWidth="1.5" strokeLinecap="round" className="cursor-pointer transition-colors duration-200"
+                style={{ color: 'rgba(200,215,170,0.45)' }}>
+                <circle cx="12" cy="8" r="4" /><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7" />
+              </svg>
+              {/* Cart */}
+              {/* <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                strokeWidth="1.5" strokeLinecap="round" className="cursor-pointer transition-colors duration-200"
+                style={{ color: 'rgba(200,215,170,0.45)' }}>
+                <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z" />
+                <line x1="3" y1="6" x2="21" y2="6" />
+                <path d="M16 10a4 4 0 01-8 0" />
+              </svg> */}
+            </div>
           </nav>
-
-          {/* Right Actions */}
-          <div className="flex items-center gap-2">
-            <Link href="/cart">
-              <Button variant="ghost" size="icon" className="relative">
-                <ShoppingCart className="h-5 w-5" />
-                {isHydrated && totalItems > 0 && (
-                  <motion.span
-                    initial={{ scale: 0 }}
-                    animate={{ scale: 1 }}
-                    className="absolute -top-1 -right-1 h-5 w-5 rounded-full bg-primary text-primary-foreground text-xs font-medium flex items-center justify-center"
-                  >
-                    {totalItems}
-                  </motion.span>
-                )}
-                <span className="sr-only">Cart</span>
-              </Button>
-            </Link>
-
-            <Link href={isAuthenticated ? '/account' : '/login'}>
-              <Button variant="ghost" size="icon">
-                <User className="h-5 w-5" />
-                <span className="sr-only">Account</span>
-              </Button>
-            </Link>
-
-            {/* Mobile Menu Button */}
-            <Button
-              variant="ghost"
-              size="icon"
-              className="md:hidden"
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            >
-              {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-              <span className="sr-only">Menu</span>
-            </Button>
-          </div>
         </div>
+
       </div>
 
       {/* Mobile Menu */}
@@ -101,22 +98,22 @@ export function Header() {
             className="md:hidden border-t border-border/40 bg-card"
           >
             <nav className="flex flex-col p-4 gap-2">
-              <Link 
-                href="/" 
+              <Link
+                href="/"
                 className="px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted rounded-lg transition-colors"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Home
               </Link>
-              <Link 
-                href="/#product" 
+              <Link
+                href="/#product"
                 className="px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted rounded-lg transition-colors"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Our Mangoes
               </Link>
-              <Link 
-                href="/#about" 
+              <Link
+                href="/#about"
                 className="px-4 py-2 text-sm font-medium text-muted-foreground hover:text-foreground hover:bg-muted rounded-lg transition-colors"
                 onClick={() => setIsMobileMenuOpen(false)}
               >

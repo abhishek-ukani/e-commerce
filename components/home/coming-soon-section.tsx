@@ -15,7 +15,7 @@ export default function ComingSoonSection() {
   return (
     <section className="relative w-full min-h-[90vh] bg-[#0A0805] flex items-center justify-center overflow-hidden">
       {/* Mango Leaf Background */}
-      <div className="absolute inset-0 opacity-[0.03]">
+      <div id="coming-soon" className="absolute inset-0 opacity-[0.03]">
         {[...Array(12)].map((_, i) => (
           <motion.div
             key={i}
