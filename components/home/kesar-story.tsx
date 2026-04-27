@@ -248,11 +248,8 @@ export function KesarStory() {
   return (
     <div id="product-details" className="relative w-full bg-background">
       {/* Section Title */}
-      <div className="text-center py-16 px-6">
-        <h2 className="font-gujarati text-4xl md:text-5xl font-bold text-foreground mb-4">
-          The Kesriya Story
-        </h2>
-        <div className="w-24 h-px bg-primary mx-auto"></div>
+      <div className="sticky top-0 left-0 z-20 p-6 md:p-8 pointer-events-none">
+        <span className="text-[#E8820C] text-lg tracking-[0.3em] uppercase">The Kesar Story</span>
       </div>
 
       {/* Desktop Sticky Scroll Section */}
@@ -298,10 +295,10 @@ export function KesarStory() {
                   <h2 className="font-gujarati text-[clamp(1.8rem,3vw,2.5rem)] font-bold text-foreground leading-[1.15] mb-3 tracking-[-0.02em]">
                     {beat.title}
                   </h2>
-                  <span className="font-serif text-[clamp(0.9rem,1.1vw,1rem)] font-light italic text-muted-foreground block mt-1 mb-6 tracking-[0.03em]">
+                  <span className="font-serif text-[clamp(0.9rem,1.1vw,1rem)] font-light italic text-foreground block mt-1 mb-6 tracking-[0.03em]">
                     {beat.subtitle}
                   </span>
-                  <p className="font-gujarati text-[0.95rem] md:text-base font-light text-muted-foreground leading-[1.85]">
+                  <p className="font-gujarati text-[0.95rem] md:text-base font-light text-foreground leading-[1.85]">
                     {beat.desc}
                   </p>
                 </div>
@@ -338,7 +335,7 @@ export function KesarStory() {
                 <span className="font-serif text-[0.9rem] font-light italic text-muted-foreground block mt-1 mb-6 tracking-[0.03em]">
                   {beat.subtitle}
                 </span>
-                <p className="font-gujarati text-[0.95rem] font-light text-muted-foreground leading-[1.85]">
+                <p className="font-gujarati text-[0.95rem] font-light text-foreground leading-[1.85]">
                   {beat.desc}
                 </p>
               </div>
