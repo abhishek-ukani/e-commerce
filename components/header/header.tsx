@@ -2,65 +2,118 @@
 
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
-import { usePathname } from 'next/navigation'
+import { usePathname, useRouter } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
-import { NAV_CONFIG } from '../header/nav-config'
+import { ArrowLeft } from 'lucide-react'
+import { NAV_CONFIG } from './nav-config'
 
 type Variant = 'home' | 'product' | 'default'
 
-export function Header({ variant }: { variant?: Variant }) {
+type HeaderProps = {
+  variant?: Variant
+  title?: string
+}
+
+// Optional: Central title mapping (no need to pass title everywhere)
+const PAGE_TITLES: Record<string, string> = {
+  '/cart': 'Your Cart',
+  '/product': 'Product Details',
+  '/checkout': 'Checkout',
+}
+
+export function Header({ variant, title: titleProp }: HeaderProps) {
   const pathname = usePathname()
+  const router = useRouter()
 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
 
-  // Detect scroll (for premium effect)
+  // Scroll effect
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 40)
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
-  // Auto detect variant if not passed
+  // Detect variant automatically
   const currentVariant: Variant =
     variant ||
-    (pathname === '/' ? 'home' :
-     pathname.startsWith('/product') ? 'product' :
-     'default')
+    (pathname === '/'
+      ? 'home'
+      : pathname.startsWith('/product')
+      ? 'product'
+      : 'default')
 
   const NAV_LINKS = NAV_CONFIG[currentVariant]
+
+  // Resolve title
+  const title = titleProp || PAGE_TITLES[pathname] || 'Page'
+
+  // Back handler (safe fallback)
+  const handleBack = () => {
+    if (window.history.length > 1) {
+      router.back()
+    } else {
+      router.push('/')
+    }
+  }
 
   return (
     <header
       className={`
         fixed top-0 left-0 right-0 z-50 transition-all duration-500
-        ${scrolled
-          ? 'bg-[#0A0805]/80 backdrop-blur-md border-b border-white/10'
-          : 'bg-transparent'}
+        ${
+          scrolled
+            ? 'bg-[#0A0805]/80 backdrop-blur-md border-b border-white/10'
+            : 'bg-transparent'
+        }
       `}
     >
       <div className="mx-auto max-w-7xl px-6">
         <div className="flex h-16 items-center justify-between">
+          
+          {/* LEFT SECTION */}
+          <div className="flex items-center gap-3">
 
-          {/* LOGO */}
-          <Link href="/" className="flex items-center gap-2.5">
-            <span className="text-sm tracking-[0.25em] uppercase text-[#E8820C]">
-              Talala Kesariya
-            </span>
-          </Link>
-
-          {/* DESKTOP NAV */}
-          <nav className="hidden md:flex gap-10">
-            {NAV_LINKS.map(link => (
-              <Link
-                key={link.label}
-                href={link.href}
-                className="text-sm tracking-wide text-white/50 hover:text-white transition-colors"
-              >
-                {link.label}
+            {/* HOME: Logo */}
+            {currentVariant === 'home' ? (
+              <Link href="/" className="flex items-center gap-2.5">
+                <span className="text-sm tracking-[0.25em] uppercase text-[#E8820C]">
+                  Talala Kesariya
+                </span>
               </Link>
-            ))}
-          </nav>
+            ) : (
+              <>
+                {/* Back Button */}
+                <button
+                  onClick={handleBack}
+                  className="text-white/70 hover:text-white transition"
+                >
+                  <ArrowLeft size={20} />
+                </button>
+
+                {/* Page Title */}
+                <span className="text-sm tracking-wide text-white font-medium">
+                  {title}
+                </span>
+              </>
+            )}
+          </div>
+
+          {/* DESKTOP NAV (only home) */}
+          {currentVariant === 'home' && (
+            <nav className="hidden md:flex gap-10">
+              {NAV_LINKS.map(link => (
+                <Link
+                  key={link.label}
+                  href={link.href}
+                  className="text-sm tracking-wide text-white/50 hover:text-white transition-colors"
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </nav>
+          )}
 
           {/* RIGHT SIDE */}
           <div className="flex items-center gap-4">
@@ -78,7 +131,7 @@ export function Header({ variant }: { variant?: Variant }) {
 
       {/* MOBILE MENU */}
       <AnimatePresence>
-        {isMobileMenuOpen && (
+        {isMobileMenuOpen && currentVariant === 'home' && (
           <motion.div
             initial={{ opacity: 0, y: -10 }}
             animate={{ opacity: 1, y: 0 }}

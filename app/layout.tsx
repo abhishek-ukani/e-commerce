@@ -25,7 +25,7 @@ const cormorantGaramond = Cormorant_Garamond({
 })
 
 export const metadata: Metadata = {
-  title: 'Talala Kesariya | તલાળા કેસરિયા - Premium Kesar Mangoes',
+  title: 'Talala Kesariya | તાલાલા કેસરિયા - Premium Kesar Mangoes',
   description: 'Order premium Kesar mangoes directly from Talala, Gujarat. 100% natural, no chemicals, straight from the farm to your doorstep.',
   keywords: ['Kesar mango', 'Talala', 'Gujarat', 'premium mangoes', 'organic mangoes', 'Indian mangoes'],
   generator: 'v0.app',

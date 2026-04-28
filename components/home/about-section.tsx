@@ -91,7 +91,7 @@ export function AboutSection() {
             
             <div className="mt-6 space-y-4 text-muted-foreground leading-relaxed">
               <p className="font-[family-name:var(--font-gujarati-sans)]">
-                તલાળા, ગુજરાત - કેસર કેરીનું જન્મસ્થળ. અમારા પરિવારે પેઢીઓથી આ સુંદર ફળની ખેતી કરી છે, 
+                તાલાલા, ગુજરાત - કેસર કેરીનું જન્મસ્થળ. અમારા પરિવારે પેઢીઓથી આ સુંદર ફળની ખેતી કરી છે, 
                 પરંપરાગત પદ્ધતિઓ અને પ્રકૃતિ પ્રત્યેના પ્રેમ સાથે.
               </p>
               <p>

@@ -12,7 +12,7 @@ const PRODUCT = {
   name: 'Kesar Mango Box',
   nameGujarati: 'કેસર કેરી બોક્સ',
   description: 'Premium handpicked Kesar mangoes from Talala, Gujarat. Each box contains approximately 25-30 mangoes, carefully selected for optimal ripeness and sweetness.',
-  descriptionGujarati: 'તલાળા, ગુજરાતથી પ્રીમિયમ હાથથી ચૂંટેલી કેસર કેરી. દરેક બોક્સમાં લગભગ 25-30 કેરી, શ્રેષ્ઠ પાકતા અને મીઠાશ માટે કાળજીપૂર્વક પસંદ કરેલી.',
+  descriptionGujarati: 'તાલાલા, ગુજરાતથી પ્રીમિયમ હાથથી ચૂંટેલી કેસર કેરી. દરેક બોક્સમાં લગભગ 25-30 કેરી, શ્રેષ્ઠ પાકતા અને મીઠાશ માટે કાળજીપૂર્વક પસંદ કરેલી.',
   price: 1499,
   weight: '10kg',
   image: '/mango-box.jpg',

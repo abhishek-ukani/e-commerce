@@ -28,7 +28,7 @@ const beats = [
     num: '02',
     title: <><em className="not-italic text-primary">ગીર ની</em><br />ધરતી — ખારી</>,
     subtitle: 'The land of Gir — where the soil remembers',
-    desc: 'ગિરનાર ના પડછાયા માં, સૌરાષ્ટ્ર ની કડકડતી ગરમી માં — આ ધરતી નો સ્વાદ કેરી ની અંદર ઉતરે સે. તળાળા ગીર ની ખારી-મીઠી હવા, કાળી માટી — આ combination દુનિયા ભર માં બીજે ક્યાંય નથ.',
+    desc: 'ગિરનાર ના પડછાયા માં, સૌરાષ્ટ્ર ની કડકડતી ગરમી માં — આ ધરતી નો સ્વાદ કેરી ની અંદર ઉતરે સે. તાલાલા ગીર ની ખારી-મીઠી હવા, કાળી માટી — આ combination દુનિયા ભર માં બીજે ક્યાંય નથ.',
     visual: (
       <svg viewBox="0 0 480 540" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" className="relative z-10 mix-blend-screen opacity-80">
         {/* Deep soil layers */}
@@ -86,7 +86,7 @@ const beats = [
     num: '03',
     title: <>સરકારી <em className="not-italic text-primary">સિક્કો</em></>,
     subtitle: 'GI Certified. The true mark of Kesar.',
-    desc: '૨૦૧૧ માં ભારત સરકારે GI Tag આપ્યો — નંબર ૧૮૫. ગુજરાત નો પે\'લો ખેત ઉત્પાદન, ને આખા ભારત ની બીજી કેરી જેને આ સન્માન મળ્યું. હવે કાયદેસર — \'ગીર કેસર\' નું નામ ફક્ત તલાળા ની કેરી ને જ વાપરી શકાય. બીજા ભઈ ગમે ઈ કે\'વા દો — અસલ તો આ જ સે.',
+    desc: '૨૦૧૧ માં ભારત સરકારે GI Tag આપ્યો — નંબર ૧૮૫. ગુજરાત નો પે\'લો ખેત ઉત્પાદન, ને આખા ભારત ની બીજી કેરી જેને આ સન્માન મળ્યું. હવે કાયદેસર — \'ગીર કેસર\' નું નામ ફક્ત તાલાલા ની કેરી ને જ વાપરી શકાય. બીજા ભઈ ગમે ઈ કે\'વા દો — અસલ તો આ જ સે.',
     visual: (
       <div className="relative w-56 h-56 md:w-80 md:h-80 z-10">
         <motion.svg viewBox="0 0 200 200" className="w-full h-full absolute inset-0" animate={{ rotate: 360 }} transition={{ duration: 20, repeat: Infinity, ease: "linear" }}>
@@ -159,7 +159,7 @@ const beats = [
     num: '05',
     title: <><em className="not-italic text-primary">ઝેર નહિ —</em><br />બસ સમય</>,
     subtitle: 'No chemicals. Ever. Not one spray.',
-    desc: 'ઘણા ભઈ લોકો કેરી ને ઝડપ થી પકવવા calcium carbide વાપરે. બ\'હાર થી જુઓ — લાગે પાકેલી. અંદર? કાચી ને બેસ્વાદ. અમારી કેરી તલાળા ગીર ની ખેતર માં થી સાચ્ચા ટેમ પર ઉતારીએ. ઘરે આવે, ૪-૫ દી રૂમ temperature પર રે\'વા દો — કુદરત પોતે જ પકવે. કોઈ gas નઈ. કોઈ chemical નઈ. કોઈ ઉતાવળ નઈ.',
+    desc: 'ઘણા ભઈ લોકો કેરી ને ઝડપ થી પકવવા calcium carbide વાપરે. બ\'હાર થી જુઓ — લાગે પાકેલી. અંદર? કાચી ને બેસ્વાદ. અમારી કેરી તાલાલા ગીર ની ખેતર માં થી સાચ્ચા ટેમ પર ઉતારીએ. ઘરે આવે, ૪-૫ દી રૂમ temperature પર રે\'વા દો — કુદરત પોતે જ પકવે. કોઈ gas નઈ. કોઈ chemical નઈ. કોઈ ઉતાવળ નઈ.',
     visual: (
       <svg viewBox="0 0 480 540" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" preserveAspectRatio="xMidYMid slice" className="relative z-10">
         <g transform="translate(240, 270)">

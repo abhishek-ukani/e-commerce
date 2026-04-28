@@ -162,7 +162,7 @@ function LoginPageContent() {
               </div>
               <div className="text-left">
                 <h1 className="font-semibold text-foreground text-xl">Talala Kesariya</h1>
-                <p className="text-sm text-primary font-[family-name:var(--font-gujarati-sans)]">તલાળા કેસરિયા</p>
+                <p className="text-sm text-primary font-[family-name:var(--font-gujarati-sans)]">તાલાલા કેસરિયા</p>
               </div>
             </div>
           </motion.div>

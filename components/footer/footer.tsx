@@ -14,7 +14,7 @@ export function Footer() {
               </div>
               <div>
                 <h3 className="font-semibold text-lg text-foreground">Talala Kesariya</h3>
-                <p className="text-sm text-muted-foreground font-[family-name:var(--font-gujarati-sans)]">તલાળા કેસરિયા</p>
+                <p className="text-sm text-muted-foreground font-[family-name:var(--font-gujarati-sans)]">તાલાલા કેસરિયા</p>
               </div>
             </div>
             <p className="text-sm text-muted-foreground leading-relaxed">

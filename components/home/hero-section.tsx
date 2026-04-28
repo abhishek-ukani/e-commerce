@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import { anton } from '@/lib/fonts'
+import { Header } from '@/components/header/header';
 
 
 
@@ -67,6 +67,7 @@ export default function HeroSection() {
         id="hero"
       >
         {/* z1 — Background scene */}
+        <Header />
         <div
           ref={bgRef}
           className="absolute inset-0 bg-cover bg-no-repeat"

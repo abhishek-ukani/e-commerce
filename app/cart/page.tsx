@@ -139,20 +139,10 @@ export default function CartPage() {
 
   return (
     <div className="min-h-screen flex flex-col bg-background">
-      <Header />
+      <Header title="Your Cart" />
       <main className="flex-1 py-8 md:py-12">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          {/* Back link */}
-          <Link 
-            href="/" 
-            className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors mb-6"
-          >
-            <ArrowLeft className="h-4 w-4" />
-            Continue Shopping
-          </Link>
-
-          <h1 className="text-3xl font-bold text-foreground mb-8">Your Cart</h1>
-
+         
           {items.length === 0 ? (
             <motion.div
               initial={{ opacity: 0, y: 20 }}

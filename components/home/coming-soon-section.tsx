@@ -80,7 +80,7 @@ export default function ComingSoonSection() {
           transition={{ duration: 0.6, delay: 0.8 }}
           viewport={{ once: true }}
         >
-          તલાળા ગીર ની કેરી પોતાના ટેમ પર પાકે — ઉતાવળ કરીએ તો સ્વાદ જાય.
+          તાલાલા ગીર ની કેરી પોતાના ટેમ પર પાકે — ઉતાવળ કરીએ તો સ્વાદ જાય.
           મે આવે એટલે સૌ'થી પે'લા તમને ખબર પડશે — પક્કી વાત.
         </motion.p>
 
