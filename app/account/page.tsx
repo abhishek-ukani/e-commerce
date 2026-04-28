@@ -32,8 +32,8 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog'
-import { Header } from '@/components/layout/header'
-import { Footer } from '@/components/layout/footer'
+import { Header } from '@/components/header/header'
+import { Footer } from '@/components/footer/footer'
 import { useAuth } from '@/components/providers/auth-provider'
 import type { Address } from '@/lib/store/auth-store'
 

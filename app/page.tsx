@@ -1,6 +1,6 @@
 import { lazy, Suspense } from 'react'
-import { Header } from '@/components/layout/header'
-import { Footer } from '@/components/layout/footer'
+import { Header } from '@/components/header/header'
+import { Footer } from '@/components/footer/footer'
 import HeroSection from '@/components/home/hero-section'
 
 // Lazy load components below the fold
