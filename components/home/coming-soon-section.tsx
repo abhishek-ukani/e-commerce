@@ -13,7 +13,7 @@ export default function ComingSoonSection() {
   }
 
   return (
-    <section className="relative w-full min-h-[90vh] bg-[#0A0805] flex items-center justify-center overflow-hidden">
+    <section className="relative w-full min-h-[70vh] bg-[#0A0805] flex items-center justify-center overflow-hidden">
       {/* Mango Leaf Background */}
       <div id="coming-soon" className="absolute inset-0 opacity-[0.03]">
         {[...Array(12)].map((_, i) => (
@@ -52,7 +52,7 @@ export default function ComingSoonSection() {
           viewport={{ once: true }}
         >
           <span className="text-[#E8820C] text-sm font-medium">
-            🥭  સિઝન ૨૦૨૬  ·  મે - જૂન - જુલાઈ
+            🥭  સિઝન ૨૦૨૬  ·  મે - જૂન
           </span>
         </motion.div>
 

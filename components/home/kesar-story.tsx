@@ -195,11 +195,11 @@ const beats = [
     num: '06',
     title: <>માત્ર <em className="not-italic text-primary">૬ અઠવાડિયા</em></>,
     subtitle: 'Nature gives us 6 weeks. We don\'t push it.',
-    desc: 'જૂન-જુલાઈ — બસ આ જ ટેમ. બાકી ના મહિના માં? ના લઈએ, ના વેચીએ. કુદરત જેટલો ટેમ આપે એમાં જ મઝા. ડિસેમ્બર માં કેસર વેચે? પૂછો — ક્યાં થી આવી, ભઈ?',
+    desc: 'મે-જૂન — બસ આ જ ટેમ. બાકી ના મહિના માં? ના લઈએ, ના વેચીએ. કુદરત જેટલો ટેમ આપે એમાં જ મઝા. ડિસેમ્બર માં કેસર વેચે? પૂછો — ક્યાં થી આવી, ભઈ?',
     visual: (
       <div className="grid grid-cols-4 gap-3 md:gap-4 relative z-10 px-6 w-full max-w-[400px]">
         {['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'].map((month) => {
-          const isActive = ['May', 'Jun', 'Jul'].includes(month);
+          const isActive = ['May', 'Jun'].includes(month);
           return (
             <div key={month} className="flex flex-col items-center">
               <div className={`w-10 h-10 md:w-16 md:h-16 rounded-full flex items-center justify-center text-[0.6rem] md:text-sm tracking-wider uppercase font-sans transition-all duration-300 ${isActive ? 'bg-primary text-background shadow-[0_0_15px_rgba(232,130,12,0.4)]' : 'bg-background text-muted-foreground/50 border border-primary/10'}`}>

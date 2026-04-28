@@ -1,16 +1,28 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
-import Image from 'next/image';
+import { useEffect, useRef, useState } from 'react';
+import { anton } from '@/lib/fonts'
+
 
 
 export default function HeroSection() {
-  const bgRef       = useRef<HTMLDivElement>(null);
-  const wordmarkRef = useRef<HTMLDivElement>(null);
-  const mangoRef    = useRef<HTMLDivElement>(null);
-  const navRef      = useRef<HTMLElement>(null);
-  const rafRef      = useRef(false);
-  const lastYRef    = useRef(0);
+  const bgRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
+  const rafRef = useRef(false);
+  const lastYRef = useRef(0);
+  const [isMobile, setIsMobile] = useState(false)
+
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768)
+    }
+
+    handleResize()
+    window.addEventListener('resize', handleResize)
+
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
 
   useEffect(() => {
     const onScroll = () => {
@@ -22,7 +34,7 @@ export default function HeroSection() {
     };
 
     const applyParallax = () => {
-      const s  = lastYRef.current;
+      const s = lastYRef.current;
       const vh = window.innerHeight;
       if (s > vh) { rafRef.current = false; return; }
       const p = s / vh;
@@ -33,26 +45,10 @@ export default function HeroSection() {
         bgRef.current.style.transform = `scale(${sc}) translateY(${s * 0.06}px)`;
       }
 
-      // Wordmark — fades quickly (premium feel)
-      if (wordmarkRef.current) {
-        wordmarkRef.current.style.opacity   = String(Math.max(0, 1 - p * 3));
-        wordmarkRef.current.style.transform = `translateY(calc(-52% + ${s * 0.22}px))`;
-      }
-
-      // Mango — very subtle vertical drift
-      if (mangoRef.current) {
-        mangoRef.current.style.transform = `translateY(${s * 0.08}px)`;
-      }
-
-      // Nav bg on scroll
-      if (navRef.current) {
-        if (s > 60) {
-          navRef.current.style.background    = 'rgba(5,12,6,0.95)';
-          navRef.current.style.backdropFilter = 'blur(12px)';
-        } else {
-          navRef.current.style.background    = '';
-          navRef.current.style.backdropFilter = '';
-        }
+      // Content — fades quickly (premium feel)
+      if (contentRef.current) {
+        contentRef.current.style.opacity = String(Math.max(0, 1 - p * 2.5));
+        contentRef.current.style.transform = `translateY(${s * 0.18}px)`;
       }
 
       rafRef.current = false;
@@ -76,36 +72,38 @@ export default function HeroSection() {
           className="absolute inset-0 bg-cover bg-no-repeat"
           style={{
             zIndex: 1,
-            backgroundImage: "url('/hero-bg.png')",
-            backgroundPosition: 'center 95%',
+            backgroundImage: isMobile
+              ? "url('/hero-mobile.png')"
+              : "url('/hero-bg.png')",
+            backgroundPosition: isMobile ? 'center center' : 'center 95%',
             transform: 'scale(1)',
             willChange: 'transform',
           }}
         />
 
-        {/* z2 — Vignette */}
+        {/* z2 — Vignette (warm dark tones matching --bg) */}
         <div
           className="absolute inset-0 pointer-events-none"
           style={{
             zIndex: 2,
             background: `
-              linear-gradient(to bottom, rgba(4,12,5,0.60) 0%, rgba(4,12,5,0.0) 18%),
-              linear-gradient(to top,    rgba(4,12,5,0.85) 0%, rgba(4,12,5,0.0) 30%),
-              linear-gradient(to right,  rgba(4,12,5,0.35) 0%, rgba(4,12,5,0.0) 25%),
-              linear-gradient(to left,   rgba(4,12,5,0.25) 0%, rgba(4,12,5,0.0) 20%)
+              linear-gradient(to bottom, rgba(10,8,5,0.70) 0%, rgba(10,8,5,0.0) 22%),
+              linear-gradient(to top,    rgba(10,8,5,0.88) 0%, rgba(10,8,5,0.0) 35%),
+              linear-gradient(to right,  rgba(10,8,5,0.40) 0%, rgba(10,8,5,0.0) 25%),
+              linear-gradient(to left,   rgba(10,8,5,0.30) 0%, rgba(10,8,5,0.0) 20%)
             `,
-          }} 
-        /> 
+          }}
+        />
 
         {/* z5 — Ground fade */}
-         <div
+        <div
           className="absolute bottom-0 left-0 right-0 pointer-events-none"
           style={{
             zIndex: 5,
             height: '18%',
-            background: 'linear-gradient(to top, rgba(4,12,5,0.92) 0%, transparent 100%)',
+            background: 'linear-gradient(to top, rgba(10,8,5,0.95) 0%, transparent 100%)',
           }}
-        /> 
+        />
 
         {/* Scroll cue */}
         <div
@@ -118,20 +116,20 @@ export default function HeroSection() {
           }}
         >
           <span className="text-[0.54rem] tracking-[0.28em] uppercase"
-                style={{ color: 'rgba(160,190,120,0.38)' }}>
+            style={{ color: 'rgba(232,130,12,0.35)' }}>
             Scroll
           </span>
           <div
             style={{
               width: 1,
               height: 36,
-              background: 'linear-gradient(to bottom, rgba(160,190,120,0.38), transparent)',
+              background: 'linear-gradient(to bottom, rgba(232,130,12,0.30), transparent)',
               animation: 'scrollPulse 2.4s ease-in-out 2.8s infinite',
             }}
           />
         </div>
 
-       
+
       </section>
 
       {/* Keyframes injected globally */}
@@ -139,6 +137,10 @@ export default function HeroSection() {
         @keyframes fadeIn {
           from { opacity: 0; }
           to   { opacity: 1; }
+        }
+        @keyframes fadeSlideUp {
+          from { opacity: 0; transform: translateY(20px); }
+          to   { opacity: 1; transform: translateY(0); }
         }
         @keyframes scrollPulse {
           0%   { transform: scaleY(0); transform-origin: top;    opacity: 0; }
@@ -153,7 +155,8 @@ export default function HeroSection() {
           from { transform: scale(1.12); opacity: 0.5; }
           to   { transform: scale(1.05); opacity: 1;   }
         }
-      `}</style>
+      `}
+      </style>
     </>
   );
 }
