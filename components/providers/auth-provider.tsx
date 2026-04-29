@@ -9,6 +9,7 @@ interface AuthContextType {
   isLoading: boolean
   isHydrated: boolean
   login: (phone: string) => Promise<void>
+  loginWithGoogle: () => Promise<void>
   verifyOtp: (phone: string, otp: string) => Promise<boolean>
   logout: () => void
   updateProfile: (updates: Partial<User>) => void
@@ -37,6 +38,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     isLoading: store.isLoading,
     isHydrated,
     login: store.login,
+    loginWithGoogle: store.loginWithGoogle,
     verifyOtp: store.verifyOtp,
     logout: store.logout,
     updateProfile: store.updateProfile,

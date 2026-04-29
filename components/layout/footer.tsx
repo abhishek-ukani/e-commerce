@@ -1,7 +1,12 @@
+'use client'
+
 import Link from 'next/link'
 import { MapPin, Phone, Mail } from 'lucide-react'
+import { useAuth } from '@/components/providers/auth-provider'
 
 export function Footer() {
+  const { isAuthenticated, logout } = useAuth()
+
   return (
     <footer className="bg-background text-foreground border-t border-border">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
@@ -43,9 +48,18 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/login" className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200">
-                  Login
-                </Link>
+                {isAuthenticated ? (
+                  <button 
+                    onClick={logout}
+                    className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200"
+                  >
+                    Log out
+                  </button>
+                ) : (
+                  <Link href="/login" className="text-sm text-muted-foreground hover:text-primary transition-colors duration-200">
+                    Login
+                  </Link>
+                )}
               </li>
             </ul>
           </div>

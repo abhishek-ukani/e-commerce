@@ -2,6 +2,8 @@
 
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
+import { auth, googleProvider } from '@/lib/firebase'
+import { signInWithPopup, signOut } from 'firebase/auth'
 
 export interface Address {
   id: string
@@ -30,7 +32,7 @@ export interface Order {
 
 export interface User {
   id: string
-  phone: string
+  phone?: string
   name?: string
   email?: string
   walletPoints: number
@@ -44,6 +46,7 @@ interface AuthState {
   isAuthenticated: boolean
   isLoading: boolean
   login: (phone: string) => Promise<void>
+  loginWithGoogle: () => Promise<void>
   verifyOtp: (phone: string, otp: string) => Promise<boolean>
   logout: () => void
   updateProfile: (updates: Partial<User>) => void
@@ -77,6 +80,36 @@ export const useAuthStore = create<AuthState>()(
         set({ isLoading: false })
       },
 
+      loginWithGoogle: async () => {
+        set({ isLoading: true })
+        try {
+          const result = await signInWithPopup(auth, googleProvider)
+          const firebaseUser = result.user
+          
+          const existingUser = get().user
+          if (existingUser && (existingUser.email === firebaseUser.email || existingUser.id === firebaseUser.uid)) {
+            set({ isAuthenticated: true, isLoading: false })
+          } else {
+            // Create new user or update existing
+            const newUser: User = {
+              id: firebaseUser.uid,
+              phone: firebaseUser.phoneNumber || undefined,
+              name: firebaseUser.displayName || undefined,
+              email: firebaseUser.email || undefined,
+              walletPoints: 100, // Welcome bonus
+              referralCode: generateReferralCode(firebaseUser.phoneNumber || firebaseUser.uid.slice(-10)),
+              addresses: [],
+              orders: [],
+            }
+            set({ user: newUser, isAuthenticated: true, isLoading: false })
+          }
+        } catch (error) {
+          console.error('Error signing in with Google:', error)
+          set({ isLoading: false })
+          throw error
+        }
+      },
+
       verifyOtp: async (phone: string, otp: string) => {
         set({ isLoading: true })
         // Simulate OTP verification - in production, verify against backend
@@ -107,8 +140,15 @@ export const useAuthStore = create<AuthState>()(
         return false
       },
 
-      logout: () => {
-        set({ isAuthenticated: false })
+      logout: async () => {
+        try {
+          await signOut(auth)
+          set({ user: null, isAuthenticated: false })
+        } catch (error) {
+          console.error('Error signing out:', error)
+          // Still clear local state
+          set({ user: null, isAuthenticated: false })
+        }
       },
 
       updateProfile: (updates) => {

@@ -128,8 +128,6 @@ export default function HeroSection() {
             }}
           />
         </div>
-
-
       </section>
 
       {/* Keyframes injected globally */}
