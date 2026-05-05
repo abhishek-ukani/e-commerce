@@ -280,7 +280,7 @@ export function KesarStory() {
 
         {/* Scrolling Content */}
         <div className="relative z-10 w-full max-w-[1400px] mx-auto flex flex-col md:flex-row md:justify-end px-6 md:px-16 lg:px-24 md:-mt-[100vh]">
-          <div className="w-full md:w-1/2 pb-[10vh] mt-10 md:mt-0">
+          <div className="w-full md:w-1/2 pb-[2vh] mt-10 md:mt-0">
             {beats.map((beat, index) => (
               <div
                 key={beat.id}

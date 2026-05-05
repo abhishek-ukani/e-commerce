@@ -12,8 +12,8 @@
   --cream: #FFF8E7;
   --muted: #8A7A68;
   --muted2: #6A5C4E;
-  --border-color: rgba(232, 130, 12, 0.12);
-  --border2: rgba(255, 248, 231, 0.06);
+  --border-color: rgba(232, 130, 12, 0.20);
+  --border2: rgba(255, 248, 231, 0.11);
 
   /* Tailwind Standard Mappings */
   --background: var(--bg);
@@ -109,7 +109,7 @@
   }
 
   .eyebrow {
-    @apply font-sans text-[0.65rem] tracking-[0.25em] uppercase text-primary mb-6 block;
+    @apply font-sans text-[0.95rem] tracking-[0.20em] uppercase text-primary mb-6 block;
   }
 
   .eyebrow-center {

@@ -4,14 +4,14 @@ export const dynamic = "force-dynamic";
 import { useState, useEffect, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import { motion } from 'framer-motion'
-import { 
-  User, 
-  Wallet, 
-  Gift, 
-  Package, 
-  MapPin, 
-  LogOut, 
-  Copy, 
+import {
+  User,
+  Wallet,
+  Gift,
+  Package,
+  MapPin,
+  LogOut,
+  Copy,
   Check,
   Plus,
   Edit2,
@@ -43,11 +43,11 @@ function AccountPageContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
   const { user, isAuthenticated, isHydrated, logout, updateProfile, addAddress, removeAddress, setDefaultAddress } = useAuth()
-  
+
   const [activeTab, setActiveTab] = useState<Tab>('profile')
   const [copied, setCopied] = useState(false)
   const [showOrderSuccess, setShowOrderSuccess] = useState(false)
-  
+
   // Profile form
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
@@ -164,13 +164,6 @@ function AccountPageContent() {
             </motion.div>
           )}
 
-          <div className="flex items-center justify-between mb-8">
-            <h1 className="text-3xl font-bold text-foreground">My Account</h1>
-            <Button variant="outline" onClick={handleLogout}>
-              <LogOut className="h-4 w-4 mr-2" />
-              Logout
-            </Button>
-          </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
             {/* Sidebar Navigation */}
@@ -182,11 +175,10 @@ function AccountPageContent() {
                       <button
                         key={tab.id}
                         onClick={() => setActiveTab(tab.id)}
-                        className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-colors ${
-                          activeTab === tab.id
-                            ? 'bg-primary text-primary-foreground'
-                            : 'text-muted-foreground hover:bg-muted hover:text-foreground'
-                        }`}
+                        className={`w-full flex items-center gap-3 px-4 py-3 rounded-lg text-sm font-medium transition-colors ${activeTab === tab.id
+                          ? 'bg-primary text-primary-foreground'
+                          : 'text-muted-foreground hover:bg-muted hover:text-foreground'
+                          }`}
                       >
                         <tab.icon className="h-4 w-4" />
                         {tab.label}
@@ -211,41 +203,49 @@ function AccountPageContent() {
             <div className="lg:col-span-3">
               {/* Profile Tab */}
               {activeTab === 'profile' && (
-                <Card>
-                  <CardHeader>
-                    <CardTitle>Profile Information</CardTitle>
-                    <CardDescription>Update your personal details</CardDescription>
-                  </CardHeader>
-                  <CardContent className="space-y-4">
-                    <div>
-                      <label className="text-sm font-medium text-foreground">Phone Number</label>
-                      <Input value={user.phone} disabled className="mt-1" />
-                      <p className="text-xs text-muted-foreground mt-1">Phone number cannot be changed</p>
-                    </div>
-                    <div>
-                      <label className="text-sm font-medium text-foreground">Full Name</label>
-                      <Input 
-                        value={name} 
-                        onChange={(e) => setName(e.target.value)}
-                        placeholder="Enter your name"
-                        className="mt-1"
-                      />
-                    </div>
-                    <div>
-                      <label className="text-sm font-medium text-foreground">Email (Optional)</label>
-                      <Input 
-                        type="email"
-                        value={email} 
-                        onChange={(e) => setEmail(e.target.value)}
-                        placeholder="Enter your email"
-                        className="mt-1"
-                      />
-                    </div>
-                    <Button onClick={handleSaveProfile} disabled={isSaving}>
-                      {isSaving ? 'Saving...' : 'Save Changes'}
+                <div className="space-y-4">
+                  <Card>
+                    <CardHeader>
+                      <CardTitle>Profile Information</CardTitle>
+                      <CardDescription>Update your personal details</CardDescription>
+                    </CardHeader>
+                    <CardContent className="space-y-4">
+                      <div>
+                        <label className="text-sm font-medium text-foreground">Phone Number</label>
+                        <Input value={user.phone} className="mt-1" />
+                      </div>
+                      <div>
+                        <label className="text-sm font-medium text-foreground">Full Name</label>
+                        <Input
+                          value={name}
+                          onChange={(e) => setName(e.target.value)}
+                          placeholder="Enter your name"
+                          className="mt-1"
+                        />
+                      </div>
+                      <div>
+                        <label className="text-sm font-medium text-foreground">Email (Optional)</label>
+                        <Input
+                          type="email"
+                          value={email}
+                          onChange={(e) => setEmail(e.target.value)}
+                          placeholder="Enter your email"
+                          className="mt-1"
+                        />
+                      </div>
+                      <Button onClick={handleSaveProfile} disabled={isSaving}>
+                        {isSaving ? 'Saving...' : 'Save Changes'}
+                      </Button>
+                    </CardContent>
+                  </Card>
+                  <div className="flex items-center justify-between mb-8">
+                    <Button variant="outline" onClick={handleLogout}>
+                      <LogOut className="h-4 w-4 mr-2" />
+                      Logout
                     </Button>
-                  </CardContent>
-                </Card>
+                  </div>
+                </div>
+
               )}
 
               {/* Wallet Tab */}
@@ -530,8 +530,8 @@ function AccountPageContent() {
                     ) : (
                       <div className="space-y-4">
                         {user.addresses.map((address) => (
-                          <div 
-                            key={address.id} 
+                          <div
+                            key={address.id}
                             className={`p-4 border rounded-xl ${address.isDefault ? 'border-primary' : 'border-border'}`}
                           >
                             <div className="flex items-start justify-between">
@@ -553,16 +553,16 @@ function AccountPageContent() {
                               </div>
                               <div className="flex gap-2">
                                 {!address.isDefault && (
-                                  <Button 
-                                    variant="ghost" 
+                                  <Button
+                                    variant="ghost"
                                     size="sm"
                                     onClick={() => setDefaultAddress(address.id)}
                                   >
                                     Set Default
                                   </Button>
                                 )}
-                                <Button 
-                                  variant="ghost" 
+                                <Button
+                                  variant="ghost"
                                   size="icon"
                                   className="text-destructive"
                                   onClick={() => removeAddress(address.id)}
